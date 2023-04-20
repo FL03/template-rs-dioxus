@@ -22,13 +22,6 @@ COPY . .
 RUN trunk build
 RUN cargo build -p xtask --release
 
-FROM builder
-
-EXPOSE 8080
-
-ENTRYPOINT [ "trunk" ]
-CMD [ "serve" ]
-
 FROM scratch as wasm
 
 COPY --from=builder /workspace/dist /app/dist
@@ -37,3 +30,10 @@ COPY --from=builder /workspace/target/release/xtask /app/xtask
 WORKDIR /app
 
 EXPOSE 8080
+
+FROM builder as development
+
+EXPOSE 8080
+
+ENTRYPOINT [ "trunk" ]
+CMD [ "serve" ]
