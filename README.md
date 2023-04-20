@@ -1,12 +1,12 @@
-# curiosity
+# template-rs-dioxide
 
-[![Clippy](https://github.com/FL03/curiosity/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/curiosity/actions/workflows/clippy.yml)
-[![Docker](https://github.com/FL03/curiosity/actions/workflows/docker.yml/badge.svg)](https://github.com/FL03/curiosity/actions/workflows/docker.yml)
-[![Rust](https://github.com/FL03/curiosity/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/curiosity/actions/workflows/rust.yml)
+[![Clippy](https://github.com/FL03/template-rs-dioxide/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/clippy.yml)
+[![Docker](https://github.com/FL03/template-rs-dioxide/actions/workflows/docker.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/docker.yml)
+[![Rust](https://github.com/FL03/template-rs-dioxide/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/rust.yml)
 
 ***
 
-Welcome to curiosity, a sandbox WebAssembly environment
+Welcome to template-rs-dioxide, a template for creating elegant user interfaces written in Rust leveraging Dioxide and TailwindCSS.
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ Welcome to curiosity, a sandbox WebAssembly environment
 #### _Clone the repository_
 
 ```bash
-git clone https://github.com/FL03/curiosity
+git clone https://github.com/FL03/template-rs-dioxide
 ```
 
 ### Docker
@@ -23,13 +23,13 @@ git clone https://github.com/FL03/curiosity
 #### _Build the image locally_
 
 ```bash
-docker buildx build --tag curiosity:latest .
+docker buildx build --tag template-rs-dioxide:latest .
 ```
 
 #### _Pull the pre-built image_
 
 ```bash
-docker pull jo3mccain/curiosity:latest
+docker pull jo3mccain/template-rs-dioxide:latest
 ```
 
 #### _Run the image_
@@ -37,7 +37,7 @@ docker pull jo3mccain/curiosity:latest
 ```bash
 docker run \
     -p 8080:8080 \
-    jo3mccain/curiosity:latest
+    jo3mccain/template-rs-dioxide:latest
 ```
 
 ### Usage

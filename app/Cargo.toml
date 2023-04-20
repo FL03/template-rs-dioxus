@@ -14,19 +14,8 @@ version = "0.1.0"
 
 [[bin]]
 name = "app"
-path = "src/bin/app.rs"
+path = "src/main.rs"
 test = false
-
-[features]
-default = []
-
-[lib]
-bench = false
-doctest = false
-crate-type = [ "cdylib", "rlib" ]
-name = "curiosity"
-path = "src/lib.rs"
-test = true
 
 
 [build-dependencies]
