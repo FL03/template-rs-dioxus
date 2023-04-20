@@ -3,23 +3,23 @@ name: Rust
 env:
   CARGO_TERM_COLOR: always
 
-  on:
-    pull_request:
-      branches: [ main, master ]
-    push:
-      branches-ignore: [ "beta*", "dev*", "next*" ]
-      tags: [ "nightly*",  "v*.*.*" ]
-    release:
-        types: [created]
-    schedule:
-      - cron: "30 9 * * *" # 9:30am UTC
-    workflow_dispatch:
-      inputs:
-        publish:
-          default: true
-          description: 'Publish'
-          required: true
-          type: boolean
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches-ignore: [ "beta*", "dev*", "next*" ]
+    tags: [ "nightly*",  "v*.*.*" ]
+  release:
+      types: [created]
+  schedule:
+    - cron: "30 9 * * *" # 9:30am UTC
+  workflow_dispatch:
+    inputs:
+      publish:
+        default: true
+        description: 'Publish'
+        required: true
+        type: boolean
 
 jobs:
   build:
