@@ -25,7 +25,7 @@ test = false
 [dependencies]
 proc-macro2 = "1"
 quote = "1"
-syn = { features = ["full"], version = "1" }
+syn = { features = ["full"], version = "2" }
 
 anyhow = "1"
 axum = { features = [], version = "0.6" }
