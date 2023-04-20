@@ -13,13 +13,12 @@ on:
 env:
   REGISTRY: hub.docker.com
   IMAGE_TAG: latest
-  BASENAME: ${{ github.event.repository.name }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BASENAME }}
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
@@ -35,7 +34,7 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BASENAME }}
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
     steps:
     - uses: actions/checkout@v3
     - name: Get cache
