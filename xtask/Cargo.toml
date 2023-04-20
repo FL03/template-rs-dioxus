@@ -1,0 +1,54 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com> (https://github.com/FL03)", "Scattered-Systems (https://github.com/scattered-systems)"]
+default-run = "xtask"
+description = "xtask"
+edition = "2021"
+license = "Apache-2.0"
+name = "xtask-sdk"
+publish = false
+version = "0.1.0" # TODO: Update the package version
+
+[[bin]]
+bench = false
+name = "xtask"
+path = "src/bin/xtask.rs"
+test = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+test = false
+
+
+
+[build-dependencies]
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { features = ["full"], version = "1" }
+
+anyhow = "1"
+axum = { features = [], version = "0.6" }
+clap = { features = ["cargo", "derive", "env"], version = "4" }
+devx-cmd = "0.5.0"
+devx-pre-commit = "0.5.0" 
+duct = "0.13.6"
+log = "0.4.17"
+man = "0.3.0"
+serde = { features = ["derive"], version = "1" }
+serde_json = "1"
+tokio = { features = ["macros", "rt"], version = "1" }
+tower = "0.4.13"
+tower-http = { features = ["fs"], version = "0.3.5"}
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[dev-dependencies]
+
+[package.metadata.docs.rs]
+all-features = true
+rustc-args = ["--cfg", "docsrs"]
+
+[target.wasm32-unknown-unknown]
+
+[target.wasm32-wasi]

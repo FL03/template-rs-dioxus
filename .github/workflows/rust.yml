@@ -1,0 +1,39 @@
+name: Rust
+
+env:
+  CARGO_TERM_COLOR: always
+
+  on:
+    pull_request:
+      branches: [ main, master ]
+    push:
+      branches-ignore: [ "beta*", "dev*", "next*" ]
+      tags: [ "nightly*",  "v*.*.*" ]
+    release:
+        types: [created]
+    schedule:
+      - cron: "30 9 * * *" # 9:30am UTC
+    workflow_dispatch:
+      inputs:
+        publish:
+          default: true
+          description: 'Publish'
+          required: true
+          type: boolean
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [ wasm32-unknown-unknown, wasm32-wasi ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup
+        run: |
+          rustup default nightly
+          rustup target add ${{ matrix.target }} --toolchain nightly
+      - name: Build
+        run: cargo build --release -v --target ${{ matrix.target }}
+  

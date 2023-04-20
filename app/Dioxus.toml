@@ -1,0 +1,30 @@
+[application]
+asset_dir = "static" # resource (public) file folder
+default_platform = "web" # Dioxus App Default Platform: desktop, web, mobile, ssr
+name = "curiosity"
+out_dir = "dist"
+
+[web.app]
+# HTML title tag content
+title = "Curiosity | ⛺"
+
+[web.watcher]
+# when watcher trigger, regenerate the `index.html`
+reload_html = true
+
+# which files or dirs will be watcher monitoring
+watch_path = ["src", "static"]
+
+# include `assets` in web platform
+[web.resource]
+# CSS style file
+style = ["static/app.css", "static/tailwind.css"]
+
+# Javascript code file
+script = []
+
+[web.resource.dev]
+
+# Javascript code file
+# serve: [dev-server] only
+script = []

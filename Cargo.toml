@@ -1,0 +1,48 @@
+[workspace.package]
+authors = ["FL03 <jo3mccain@icloud.com> (https://github.com/FL03)"]
+categories = []
+description = "A template for a Rust application using the Dioxide framework."
+edition = "2021"
+homepage = "https://github.com/FL03/template-rs-dioxide/wiki"
+keywords = ["rust", "dioxide", "template"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/FL03/template-rs-dioxide"
+version = "0.1.0"
+
+[workspace]
+default-members = [
+    "app"
+]
+exclude = [
+    "xtask",
+]
+members = [
+    "app",
+    # "xtask"
+]
+
+[workspace.dependencies]
+
+
+[profile.dev]
+codegen-units = 256
+debug = true
+debug-assertions = true
+incremental = true
+lto = false
+panic = "unwind"
+rpath = false
+opt-level = 0
+overflow-checks = true
+
+[profile.release]
+codegen-units = 16
+debug = false
+debug-assertions = false
+incremental = false
+lto = true
+panic = "unwind"
+rpath = false
+opt-level = 'z'
+overflow-checks = false
