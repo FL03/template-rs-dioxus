@@ -85,7 +85,7 @@ pub async fn wasm_server() -> anyhow::Result<()> {
     let root = project_root().to_str().unwrap().to_string();
     let dist = format!("{}/{}", root, "dist");
 
-    let serve_dir = get_service(ServeDir::new(dist.as_str())).handle_error(handle_error);
+    let serve_dir = get_service(ServeDir::new(dist.as_str()));
     let app = axum::Router::new().nest_service("/", serve_dir);
     axum::Server::bind(&"0.0.0.0:8080".parse().unwrap())
         .serve(app.into_make_service())
@@ -105,7 +105,7 @@ impl Wasm {
     }
     pub async fn client(&self) -> axum::Router {
         let serve_dir =
-            get_service(ServeDir::new(self.workdir.as_str())).handle_error(handle_error);
+            get_service(ServeDir::new(self.workdir.as_str()));
         axum::Router::new().nest_service("/", serve_dir)
     }
 }
