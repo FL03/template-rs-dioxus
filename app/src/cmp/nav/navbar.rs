@@ -4,7 +4,7 @@
     Description: ... Summary ...
 */
 #![allow(non_snake_case)]
-use crate::components::icons::{RightArrowIcon, StacksIcon};
+use crate::cmp::icons::{RightArrowIcon, StacksIcon};
 use dioxus::prelude::*;
 
 #[derive(Clone, Debug, Default, Eq, Hash, PartialEq, Props)]

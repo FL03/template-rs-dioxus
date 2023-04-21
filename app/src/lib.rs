@@ -9,18 +9,10 @@ mod primitives;
 mod utils;
 
 pub mod actors;
-pub mod components;
+pub mod cmp;
 
-use components::{hero::Hero, nav::navbar::NavBar};
+use cmp::{hero::Hero, nav::navbar::NavBar};
 use dioxus::prelude::*;
-
-
-pub fn starter() {
-    #[cfg(target_family = "wasm")]
-    dioxus_web::launch_with_props(app, (), dioxus_web::Config::new());
-    #[cfg(any(macos, unix, windows))]
-    dioxus_desktop::launch_with_props(app, (), dioxus_desktop::Config::new());
-}
 
 #[derive(Clone, Debug, Default, Eq, Hash, PartialEq, Props)]
 pub struct ApplicationScope {

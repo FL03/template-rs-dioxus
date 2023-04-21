@@ -8,7 +8,7 @@ homepage = "https://github.com/FL03/template-rs-dioxide/wiki"
 keywords = ["rust", "dioxide", "template"]
 license = "Apache-2.0"
 name = "template-rs-dioxide"
-readme = "README.md"
+readme.workspace = true
 repository = "https://github.com/FL03/template-rs-dioxide"
 version = "0.1.0"
 
@@ -17,6 +17,20 @@ bench = false
 doctest = false
 name = "app"
 path = "src/bin/app.rs"
+test = false
+
+[[bin]]
+bench = false
+doctest = false
+name = "desktop"
+path = "src/bin/desktop.rs"
+test = false
+
+[[bin]]
+bench = false
+doctest = false
+name = "web"
+path = "src/bin/web.rs"
 test = false
 
 [features]
