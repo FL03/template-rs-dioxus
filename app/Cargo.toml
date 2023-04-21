@@ -13,10 +13,27 @@ repository = "https://github.com/FL03/template-rs-dioxide"
 version = "0.1.0"
 
 [[bin]]
+bench = false
+doctest = false
 name = "app"
-path = "src/main.rs"
+path = "src/bin/app.rs"
 test = false
 
+[features]
+default = []
+
+wasm = []
+wasm-ext = [
+    "gloo/futures",
+    "pulldown-cmark/serde"
+]
+
+[lib]
+bench = true
+crate-type = ["cdylib", "rlib"]
+name = "curiosity"
+path = "src/lib.rs"
+test = true
 
 [build-dependencies]
 

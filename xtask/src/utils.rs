@@ -1,5 +1,5 @@
 /*
-    Appellation: utils <modules>
+    Appellation: utils <module>
     Contrib: FL03 <jo3mccain@icloud.com>
     Description: ... Summary ...
 */
@@ -8,10 +8,10 @@ use std::path::{Path, PathBuf};
 use std::{collections::HashMap, fs, io, process::Command};
 
 ///
-pub fn command(program: &str, args: &[&str]) -> Result<()> {
+pub fn command(program: &str, args: Vec<&str>) -> Result<()> {
     let mut cmd = Command::new(program);
     cmd.current_dir(project_root());
-    cmd.args(args).status()?;
+    cmd.args(args.as_slice()).status()?;
     Ok(())
 }
 ///
@@ -30,7 +30,7 @@ pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> io::Result<
 }
 ///
 pub fn dist_dir() -> PathBuf {
-    project_root().join(".artifacts/dist")
+    project_root().join("dist")
 }
 ///
 pub fn execute_bundle(bundle: HashMap<&str, Vec<Vec<&str>>>) -> Result<()> {
@@ -44,9 +44,9 @@ pub fn execute_bundle(bundle: HashMap<&str, Vec<Vec<&str>>>) -> Result<()> {
     }
     Ok(())
 }
-/// Fetch the project root unless specified otherwise with a CARGO_MANIFEST_DIR env variable
-pub fn package_name() -> String {
-    env!("CARGO_PKG_NAME").to_string()
+
+pub fn rustup(args: Vec<&str>) -> Result<()> {
+    command("rustup", args)
 }
 /// Fetch the project root unless specified otherwise with a CARGO_MANIFEST_DIR env variable
 pub fn project_root() -> PathBuf {
@@ -55,4 +55,29 @@ pub fn project_root() -> PathBuf {
         .nth(1)
         .unwrap()
         .to_path_buf()
+}
+
+pub struct Cargo {
+    queue: Vec<(String, Vec<String>)>,
+}
+
+impl Cargo {
+    pub fn new() -> Self {
+        Self {
+            queue: Vec::new(),
+        }
+    }
+    pub fn add(&mut self, command: String, args: Vec<String>) {
+        self.queue.push((command, args));
+    }
+    pub fn run(&self) -> Result<()> {
+        for (cmd, args) in self.queue.clone() {
+            let mut command = Command::new("cargo");
+            command.current_dir(project_root());
+            command.arg(cmd);
+            command.args(args);
+            command.status()?;
+        }
+        Ok(())
+    }
 }

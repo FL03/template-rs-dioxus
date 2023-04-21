@@ -20,7 +20,3 @@ updates:
     directory: /xtask
     schedule:
         interval: daily
-  - package-ecosystem: npm
-    directory: /app
-    schedule:
-        interval: daily
