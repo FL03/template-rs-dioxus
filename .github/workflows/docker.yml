@@ -21,36 +21,16 @@ env:
   WORKDIR: app
 
 jobs:
-  build:
-    
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build (app)
-        run: |
-          docker buildx build --tag ${{ env.BASENAME }}:${{ env.IMAGE_TAG }} --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 app
-      - name: cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ github.sha }}
   publish:
-    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-    - name: Get cache
-      uses: actions/cache@v3
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
+        context: ${{ env.WORKDIR }}
         dockerfile: ${{ env.WORKDIR }}/Dockerfile
         name: ${{ env.BASENAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
