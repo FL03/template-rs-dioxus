@@ -6,5 +6,5 @@
 
 fn main() {
     #[cfg(any(macos, unix, windows))]
-    dioxus_desktop::launch_with_props(curiosity::app, (), dioxus_desktop::Config::new());
+    dioxus_desktop::launch_with_props(curiosity::app, curiosity::ApplicationScope::new(), dioxus_desktop::Config::new());
 }

@@ -6,10 +6,10 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
-#[derive(Clone, Debug, Default, Eq, Hash, PartialEq, Props)]
+#[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd, Props)]
 pub struct HeroScope {
     pub banner: String,
-    pub img: String,
+    pub src: String,
 }
 
 pub fn Hero(cx: Scope<HeroScope>) -> Element {
@@ -37,7 +37,7 @@ pub fn Hero(cx: Scope<HeroScope>) -> Element {
         div { class: "lg:max-w-lg lg:w-full md:w-1/2 w-5/6",
             img {
                 class: "object-cover object-center rounded",
-                src: "{cx.props.img}",
+                src: "{cx.props.src}",
                 referrerpolicy:"no-referrer",
                 alt: "hero",
             }

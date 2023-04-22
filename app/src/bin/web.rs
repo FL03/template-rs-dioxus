@@ -6,7 +6,13 @@
 
 fn main() -> anyhow::Result<()> {
     #[cfg(target_family = "wasm")]
-    dioxus_web::launch_with_props(curiosity::app, (), dioxus_web::Config::new());
+    {
+        use curiosity::{app, ApplicationScope};
+
+        let scope = ApplicationScope::new();
+        dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new());
+    }
+    
 
     Ok(())
 }
