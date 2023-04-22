@@ -23,7 +23,7 @@ concurrency:
 jobs:
   publish:
     environment:
-      name: staging
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     name: Build
     runs-on: ubuntu-latest
