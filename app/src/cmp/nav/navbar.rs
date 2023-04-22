@@ -7,7 +7,7 @@
 use crate::cmp::icons::{RightArrowIcon, StacksIcon};
 use dioxus::prelude::*;
 
-#[derive(Clone, Debug, Default, Eq, Hash, PartialEq, Props)]
+#[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd, Props)]
 
 pub struct State {
     pub banner: String,

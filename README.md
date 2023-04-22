@@ -2,6 +2,7 @@
 
 [![Clippy](https://github.com/FL03/template-rs-dioxide/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/clippy.yml)
 [![Docker](https://github.com/FL03/template-rs-dioxide/actions/workflows/docker.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/docker.yml)
+[![Clippy](https://github.com/FL03/template-rs-dioxide/actions/workflows/pages.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/pages.yml)
 [![Rust](https://github.com/FL03/template-rs-dioxide/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/template-rs-dioxide/actions/workflows/rust.yml)
 
 ***
