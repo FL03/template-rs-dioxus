@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: trunk --config app/Trunk.toml build --release
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
           path: app/dist
   deploy:
