@@ -44,4 +44,3 @@ pub fn Hero(cx: Scope<HeroScope>) -> Element {
         }
     ))
 }
-

@@ -6,6 +6,10 @@ on:
   push:
     branches-ignore: [ "dev*", "next", "nightly*" ]
     tags: [ "v*.*.*" ]
+  release:
+    types: [ published ]
+  repository_dispatch:
+    types: [ docker ]
   schedule:
     - cron: "30 9 * * *" # 9:30 UTC
   workflow_dispatch:
@@ -14,14 +18,17 @@ env:
   BASENAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
   REGISTRY: hub.docker.com
   IMAGE_TAG: latest
+  WORKDIR: app
 
 jobs:
   build:
+    
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker buildx build --tag ${{ env.BASENAME }} .
+      - name: Build (app)
+        run: |
+          docker buildx build --tag ${{ env.BASENAME }}:${{ env.IMAGE_TAG }} --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 --cache-to=type=local,dest=/tmp/.buildx-cache app
       - name: cache
         uses: actions/cache@v3
         with:
@@ -42,7 +49,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
-        dockerfile: Dockerfile
+        dockerfile: ${{ env.WORKDIR }}/Dockerfile
         name: ${{ env.BASENAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         snapshot: true

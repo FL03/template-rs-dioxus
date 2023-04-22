@@ -17,14 +17,14 @@ use dioxus::prelude::*;
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, Props)]
 pub struct ApplicationScope {
     pub name: String,
-    pub content: String
+    pub content: String,
 }
 
 impl ApplicationScope {
     pub fn new() -> Self {
         Self {
             name: env!("CARGO_PKG_NAME").to_string(),
-            content: "A template for a Dioxus application".to_string()
+            content: "A template for a Dioxus application".to_string(),
         }
     }
     pub fn with_name(mut self, name: impl ToString) -> Self {

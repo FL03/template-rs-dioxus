@@ -1,6 +1,5 @@
 [build]
 dist = "dist"
-release = true
 target = "index.html"
 
 [serve]
