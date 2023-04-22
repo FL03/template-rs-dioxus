@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build (app)
         run: |
-          docker buildx build --tag ${{ env.BASENAME }}:${{ env.IMAGE_TAG }} --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 --cache-to=type=local,dest=/tmp/.buildx-cache app
+          docker buildx build --tag ${{ env.BASENAME }}:${{ env.IMAGE_TAG }} --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 app
       - name: cache
         uses: actions/cache@v3
         with:
@@ -41,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
     - name: Get cache
       uses: actions/cache@v3
       with:
@@ -52,5 +54,6 @@ jobs:
         dockerfile: ${{ env.WORKDIR }}/Dockerfile
         name: ${{ env.BASENAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+        platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
         snapshot: true
         username: ${{ secrets.DOCKERHUB_USERNAME }}
