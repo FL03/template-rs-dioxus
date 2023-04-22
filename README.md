@@ -13,6 +13,20 @@ Welcome to template-rs-dioxide, a template for creating elegant user interfaces 
 
 ### Building from the source
 
+Make sure [Rust](https://www.rust-lang.org/tools/install) is installed properly on the host machine
+
+```bash
+rustup update
+rustup default nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+```
+
+#### _Install the dev tools_
+
+```bash
+cargo install trunk wasm-bindgen-cli
+```
+
 #### _Clone the repository_
 
 ```bash
@@ -36,9 +50,7 @@ docker pull jo3mccain/template-rs-dioxide:latest
 #### _Run the image_
 
 ```bash
-docker run \
-    -p 8080:8080 \
-    jo3mccain/template-rs-dioxide:latest
+docker run --name template-rs-dioxide -d -p 8080:80 jo3mccain/template-rs-dioxide:latest
 ```
 
 ### Usage
