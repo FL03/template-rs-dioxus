@@ -5,15 +5,15 @@
 */
 use curiosity::{ApplicationScope, app};
 
-fn main() {
+fn main() -> anyhow::Result<()> {
     let scope = ApplicationScope::new();
-    dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new());
+    starter(scope)
 }
 
-// fn starter(scope: ApplicationScope) -> anyhow::Result<()> {
-//     #[cfg(target_family = "wasm")]
-//     dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new());
-//     #[cfg(any(macos, unix, windows))]
-//     dioxus_desktop::launch_with_props(app, scope, dioxus_desktop::Config::new());
-//     Ok(())
-// }
+fn starter(scope: ApplicationScope) -> anyhow::Result<()> {
+    #[cfg(target_family = "wasm")]
+    dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new());
+    #[cfg(any(macos, unix, windows))]
+    dioxus_desktop::launch_with_props(app, scope, dioxus_desktop::Config::new());
+    Ok(())
+}

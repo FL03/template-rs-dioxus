@@ -46,9 +46,9 @@ strum = { features = ["derive"], version = "0.24" }
 
 # ui/ux
 dioxus = { features = ["macro"], version = "0.3" }
-# [target.'cfg(any(unix, windows))'.dependencies]
-# dioxus-desktop = "0.3"
-# [target.'cfg(target_family = "wasm")'.dependencies]
+[target.'cfg(any(unix, windows))'.dependencies]
+dioxus-desktop = "0.3"
+[target.'cfg(target_family = "wasm")'.dependencies]
 dioxus-web = "0.3"
 
 # utils
