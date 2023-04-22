@@ -1,26 +1,36 @@
-# Dirs
-**/__pycache__/
-**/__sapper__/
-
-**/.DS_STORE/
+# Artifacts
 **/.artifacts/
 **/.docker/data/
-**/.idea/
-**/.svelte-kit/
-**/.vscode/
-
-**/build/
 **/debug/
 **/dist/
 **/env/
+
+# IDEs
+**/.idea/
+**/.vscode/
+
+# Node
+**/build/
 **/node_modules/
-**/target/
+
+# Python
+**/__pycache__/
+**/.pytest_cache/
 **/venv/
 
-# Extensions
+# Rust
+**/Cargo.lock
+**/target/
+
 **/*.bk
 **/*.bk.*
 
+# Svelte
+**/__sapper__/
+**/.DS_STORE/
+**/.svelte-kit/
+
+# Extensions
 **/*.csv
 **/*.csv.*
 
