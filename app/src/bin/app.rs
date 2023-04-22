@@ -7,7 +7,7 @@ use curiosity::{ApplicationScope, app};
 
 fn main() {
     let scope = ApplicationScope::new();
-    dioxus_desktop::launch_with_props(app, scope, dioxus_desktop::Config::new());
+    dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new());
 }
 
 // fn starter(scope: ApplicationScope) -> anyhow::Result<()> {
