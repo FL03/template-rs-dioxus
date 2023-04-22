@@ -1,7 +1,7 @@
 [build]
 dist = "dist"
 release = true
-target = "app/index.html"
+target = "index.html"
 
 [serve]
 address = "0.0.0.0"

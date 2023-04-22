@@ -19,15 +19,15 @@ ADD . /workspace
 WORKDIR /workspace
 
 COPY . .
-RUN trunk build
+RUN trunk --config app/Trunk.toml build
 
 FROM builder as development
 
 EXPOSE 8080
 
-ENTRYPOINT [ "trunk" ]
+ENTRYPOINT [ "trunk", "--config", "app/Trunk.toml" ]
 CMD [ "serve" ]
 
 FROM nginx:latest as production
 
-COPY --from=builder /workspace/dist /usr/share/nginx/html
+COPY --from=builder /workspace/app/dist /usr/share/nginx/html
