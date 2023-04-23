@@ -1,0 +1,49 @@
+name: Firebase
+
+concurrency:
+  group: "firebase"
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+  FIREBASE_PID: curiosity-2f6e1
+  RUST_BACKTRACE: full
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ v*.*.* ]
+  release:
+    types: [ published ]
+  repository_dispatch:
+    types: [firebase]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pages: write
+
+jobs:
+  publisher:
+    environment:
+      name: production
+      url: https://${{ env.FIREBASE_PID }}.web.app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup (Rust)
+        run: |
+          rustup default nightly
+          rustup target add wasm32-unknown-unknown --toolchain nightly
+      - name: Setup (trunk)
+        run: cargo install trunk wasm-bindgen-cli
+      - name: Build
+        run: trunk build --release
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          channelId: live
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CURIOSITY_2F6E1 }}'
+          projectId: ${{ env.FIREBASE_PID }}
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -24,10 +24,18 @@ jobs:
         target: [ wasm32-unknown-unknown, wasm32-wasi ]
     steps:
       - uses: actions/checkout@v3
-      - name: Setup
+      - name: rustup
         run: |
           rustup default nightly
           rustup target add ${{ matrix.target }} --toolchain nightly
       - name: Build
         run: cargo build --release -v --target ${{ matrix.target }}
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            target/${{ matrix.target }}/release
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
   
