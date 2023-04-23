@@ -2,7 +2,8 @@
 
 [![Clippy](https://github.com/FL03/template-rs-dioxus/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/clippy.yml)
 [![Docker](https://github.com/FL03/template-rs-dioxus/actions/workflows/docker.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/docker.yml)
-[![Clippy](https://github.com/FL03/template-rs-dioxus/actions/workflows/pages.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/pages.yml)
+[![Firebase](https://github.com/FL03/template-rs-dioxus/actions/workflows/firebase.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/firebase.yml)
+[![Pages](https://github.com/FL03/template-rs-dioxus/actions/workflows/pages.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/pages.yml)
 [![Rust](https://github.com/FL03/template-rs-dioxus/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/template-rs-dioxus/actions/workflows/rust.yml)
 
 ***
