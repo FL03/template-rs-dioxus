@@ -16,7 +16,7 @@ on:
   release:
     types: [ published ]
   repository_dispatch:
-    types: [firebase]
+    types: [ firebase ]
   workflow_dispatch:
 
 permissions:
@@ -40,7 +40,7 @@ jobs:
       - name: Setup (trunk)
         run: cargo install trunk wasm-bindgen-cli
       - name: Build
-        run: trunk build --release
+        run: trunk --config app/Trunk.toml build --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           channelId: live
