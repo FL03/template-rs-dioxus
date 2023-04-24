@@ -41,7 +41,7 @@ anyhow = "1"
 futures = "0.3"
 serde = { features = ["derive"], version = "1" }
 serde_json = "1"
-smart-default = "0.6"
+smart-default = "0.7"
 strum = { features = ["derive"], version = "0.24" }
 
 # ui/ux
