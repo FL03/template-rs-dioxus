@@ -1,1 +1,0 @@
-document.getElementById("sample").textContent="Hello World!";
