@@ -5,3 +5,11 @@
 */
 
 pub mod navbar;
+
+use dioxus::prelude::Props;
+
+#[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd, Props)]
+
+pub struct Navigation {
+    pub banner: String,
+}

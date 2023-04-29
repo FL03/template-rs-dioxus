@@ -6,40 +6,52 @@
 #[cfg(target_family = "wasm")]
 pub use self::wasm::*;
 
+pub mod auth {
+
+    use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
+
+    pub fn get_auth_header(token: &str) -> HeaderMap {
+        let mut headers = HeaderMap::new();
+        headers.insert(
+            AUTHORIZATION,
+            HeaderValue::from_str(&format!("Bearer {}", token)).unwrap(),
+        );
+        headers
+    }
+}
+
 #[cfg(target_family = "wasm")]
 mod wasm {
     use crate::JsResult;
-    use gloo::net::http::{Request, RequestRedirect, Response};
-    use pulldown_cmark::{html, Options, Parser};
+    use wasm_bindgen::prelude::*;
+    use wasm_bindgen_futures::JsFuture;
+    use web_sys::{Request, RequestInit, RequestMode, Response};
 
-    /// Function for quickly converting markdown into html
-    pub fn markdown_to_html(input: String) -> String {
-        let mut options = Options::empty();
-        options.insert(Options::ENABLE_STRIKETHROUGH);
+    #[wasm_bindgen]
+    pub async fn fetch_github(repo: String) -> Result<JsValue, JsValue> {
+        let mut opts = RequestInit::new();
+        opts.method("GET");
+        opts.mode(RequestMode::Cors);
 
-        let parser = Parser::new_ext(input.as_str(), options);
+        let url = format!("https://api.github.com/repos/{}/branches/master", repo);
 
-        // Write to String buffer.
-        let mut html_output = String::new();
-        html::push_html(&mut html_output, parser);
-        html_output
-    }
+        let request = Request::new_with_str_and_init(&url, &opts)?;
 
-    ///
-    pub async fn fetch(url: &str) -> JsResult<Response> {
-        let res = request(url).send().await?;
-        Ok(res)
-    }
-    /// Function wrapper for quickly initializing new [Request] given a valid url
-    pub fn request(url: &str) -> Request {
-        Request::new(url)
-    }
-    ///
-    pub async fn redirect(url: &str) -> JsResult {
-        request(url)
-            .redirect(RequestRedirect::Follow)
-            .send()
-            .await?;
-        Ok(())
+        request
+            .headers()
+            .set("Accept", "application/vnd.github.v3+json")?;
+
+        let window = web_sys::window().unwrap();
+        let resp_value = JsFuture::from(window.fetch_with_request(&request)).await?;
+
+        // `resp_value` is a `Response` object.
+        assert!(resp_value.is_instance_of::<Response>());
+        let resp: Response = resp_value.dyn_into().unwrap();
+
+        // Convert this other `Promise` into a rust `Future`.
+        let json = JsFuture::from(resp.json()?).await?;
+
+        // Send the JSON response back to JS.
+        Ok(json)
     }
 }

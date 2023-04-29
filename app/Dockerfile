@@ -1,8 +1,4 @@
-FROM jo3mccain/trunkrs:latest as builder-base
-
-RUN apt-get update -y && apt-get upgrade -y
-
-FROM builder-base as builder
+FROM jo3mccain/trunkrs:latest as builder
 
 ENV CARGO_TERM_COLOR=always
 
@@ -14,10 +10,12 @@ RUN trunk build --release
 
 FROM builder as development
 
-EXPOSE 8080
+ENV TRUNK_SERVE_PORT=80
+
+EXPOSE ${TRUNK_SERVE_PORT}
 
 ENTRYPOINT [ "trunk" ]
-CMD = [ "serve" ]
+CMD [ "serve" ]
 
 FROM nginx:alpine-slim as production
 

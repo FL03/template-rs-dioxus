@@ -1,0 +1,18 @@
+{
+    "dependencies": {
+        "firebase": "latest",
+        "firebaseui": "latest"
+    },
+    "devDependencies": {
+        "webpack": "latest"
+    },
+    "name": "@gambit/ui",
+    "scripts": {
+        "build": "npm run webpack:build",
+        "start": "",
+        "trunk:build": "trunk build",
+        "webpack:build": "webpack build"
+    },
+    "type": "commonjs",
+    "version": "0.1.0"
+}

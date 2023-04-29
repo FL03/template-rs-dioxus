@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base data-trunk-public-url/>
+    <link
+        crossorigin="anonymous"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css"
+        integrity="sha512-RvQxwf+3zJuNwl4e0sZjQeX7kUa3o82bDETpgVCH2RiwYSZVDdFJ7N/woNigN/ldyOOoKw8584jM4plQdt8bhA=="
+        referrerpolicy="no-referrer"
+        rel="stylesheet"
+    />
+    <link data-trunk href="../Cargo.toml" rel="rust"/>
+    <link data-trunk rel="icon" href="static/media/favicon.jpg"/>
+    <link data-trunk rel="css" href="static/app.css"/>
+    <link data-trunk rel="css" href="static/tailwind.css"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <title>Gambit</title>
+    <!-- Scripts -->
+    <link data-trunk href="static/js/firebase.js" rel="inline" type="js"/>
+    <link data-trunk href="static/js/map.js" rel="inline" type="js"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- Firebase UI -->
+    <link rel="stylesheet" type="text/css" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <!-- Firebase (features) -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+  </head>
+  <body>
+    <div id="main"></div>
+    <div id="load"></div>
+    <script data-trunk src="static/js/app.js"></script>
+    <script>
+      (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+        key: process.env.GCLOUD_MAPS_API_KEY,
+        // Add other bootstrap parameters as needed, using camel case.
+        // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        firebase.auth().onAuthStateChanged(user => { });
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.classList.add("hidden");
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+    <script 
+        crossorigin="anonymous" 
+        integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+        referrerpolicy="no-referrer"
+        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js">
+    </script>
+  </body>
+</html>
