@@ -15,6 +15,12 @@ name = "app"
 path = "src/bin/app.rs"
 test = false
 
+[[bin]]
+bench = false
+name = "web"
+path = "src/bin/web.rs"
+test = false
+
 [features]
 default = []
 
