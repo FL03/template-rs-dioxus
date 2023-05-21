@@ -36,6 +36,10 @@ impl FirebaseConfig {
         self.api_key = api_key;
         self
     }
+    pub fn set_pid(mut self, pid: String) -> Self {
+        self.project_id = pid;
+        self
+    }
 }
 
 #[cfg(target_arch = "wasm32-unknown-unknown")]

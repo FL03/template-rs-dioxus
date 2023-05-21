@@ -1,20 +1,32 @@
 {
+  "author": {
+    "name": "FL03",
+    "email": "jo3mccain@icloud.com",
+    "url": "https://github.com/FL03"
+  },
+  "bugs": "https://github.com/FL03/template-rs-dioxus/issues",
   "dependencies": {
+    "cookie": "latest",
     "dotenv": "latest"
   },
   "devDependencies": {
     "@types/google.maps": "latest",
-    "firebase": "latest",
-    "firebase-admin": "latest",
-    "firebase-functions": "latest",
+    "@types/node": "latest",
     "tailwindcss": "latest",
-    "typescript": "latest",
+    "ts-node": "latest",
+    "tslib": "latest",
+    "typescript": "beta",
     "vite": "beta"
   },
+  "homepage": "https://github.com/FL03/template-rs-dioxus/wiki",
+  "license": "Apache-2.0",
   "name": "@pzzld/template-rs-dioxus",
+  "private": true,
+  "readme": "https://github.com/FL03/template-rs-dioxus/#README",
+  "repository": "https://github.com/FL03/template-rs-dioxus",
   "scripts": {
-    "build": "",
-    "start": "",
+    "build": "tsc && npm run trunk:build",
+    "start": "trunk serve",
     "trunk:build": "trunk build"
   },
   "type": "module",

@@ -5,12 +5,10 @@
 //! Gambit
 //!
 //!
-extern crate dotenv;
 use template_rs_dioxus::{app, ApplicationScope};
 
 fn main() -> anyhow::Result<()> {
-    dotenv::dotenv().ok();
-    let scope = ApplicationScope::new().with_name("Gambit");
+    let scope = ApplicationScope::new().with_name("Template");
     starter(scope)
 }
 
