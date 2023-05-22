@@ -2,9 +2,6 @@
     Appellation: app <binary>
     Contrib: FL03 <jo3mccain@icloud.com> (https://github.com/FL03)
 */
-//! Gambit
-//!
-//!
 use template_rs_dioxus::{app, ApplicationScope};
 
 fn main() -> anyhow::Result<()> {
@@ -13,9 +10,9 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn starter(scope: ApplicationScope) -> anyhow::Result<()> {
-    #[cfg(target_family = "wasm")]
+    #[cfg(feature = "wasm")]
     dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new().hydrate(true));
-    #[cfg(any(macos, unix, windows))]
+    #[cfg(feature = "desktop")]
     dioxus_desktop::launch_with_props(app, scope, dioxus_desktop::Config::new());
     Ok(())
 }

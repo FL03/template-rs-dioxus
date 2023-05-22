@@ -1,7 +1,7 @@
 [application]
 asset_dir = "static"
 default_platform = "web"
-name = "Template"
+name = "Demo"
 out_dir = "dist"
 
 [web.app]
@@ -9,15 +9,15 @@ title = "Template"
 
 [web.watcher]
 index_on_404 = true
+reload_html = true
 watch_path = [
-    "static",
     "src",
+    "static",
 ]
 
 [web.resource]
 style = [
-    "css/app.css",
-    "css/tailwind.css",
+    "css/styles.css"
 ]
 script = [
    

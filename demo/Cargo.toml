@@ -1,0 +1,45 @@
+[package]
+name = "demo"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+
+desktop = [
+    "dioxus-desktop"
+]
+ssr = [
+    "dioxus-ssr"
+]
+web = [
+    "dioxus-router/web", 
+    "dioxus-web/hydrate"
+]
+
+server = [
+    "axum"
+]
+wasm = []
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+cfg-if = "1"
+dioxus = "0.3"
+dioxus-desktop = { optional = true, version = "0.3" }
+dioxus-router = { features = ["web"], version = "0.3" }
+dioxus-ssr = { optional = true, version = "0.3" }
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+dioxus-web = { features = ["hydrate"], version = "0.3" }
+serde = { features = ["derive"], version = "1" }
+serde_json = "1"
+strum = { features = ["derive"], version = "0.24" }
+smart-default = "0.7"
+
+
+axum = { features = [], optional = true, version = "0.6" }
+tokio = { features = ["full"], optional = true, version = "1" }
+
+# dioxus-web = { features = ["hydrate"], optional = true, version = "0.3" }
