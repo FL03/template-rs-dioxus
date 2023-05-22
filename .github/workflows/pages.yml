@@ -25,12 +25,14 @@ permissions:
   pages: write
 
 jobs:
-  publisher:
-    environment:
-      name: production
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Setup (Pages)
+        id: pages
+        uses: actions/configure-pages@v3
       - name: Setup (Rust)
         run: |
           rustup default nightly
@@ -39,9 +41,17 @@ jobs:
         run: cargo install dioxus-cli wasm-bindgen-cli
       - name: Build
         run: cd app && dioxus build --release
-      - name: Deploy Project 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v1
         with:
-          branch: gh-pages
-          clean: false
-          folder: app/dist
+          path: app/dist
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
