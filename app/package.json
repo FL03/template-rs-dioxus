@@ -27,6 +27,8 @@
   "scripts": {
     "build": "tsc && npm run rust:build",
     "start": "trunk serve",
+    "css:build": "tailwindcss -w -o static/css/tailwind.css --minify",
+    "css:dev": "tailwindcss -w -o static/css/tailwind.css",
     "rust:build": "dioxus build",
     "rust:dev": "dioxus serve"
   },

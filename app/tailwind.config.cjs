@@ -1,15 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 const config = {
     content: [
+        "./dist/**/*.{css,html}",
         "./src/**/*.{css,html,rs}", 
-        "./dist/**/*.{css,html}"
+        "./static/**/*.{css,html}"
     ],
     darkMode: 'class', // or 'media' or 'class'
     mode: 'jit',
     plugins: [],
-    purge: [
-        "src/**/*.rs"
-    ],
     theme: {
         extend: {},
     },

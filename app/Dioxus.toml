@@ -20,7 +20,7 @@ style = [
     "css/tailwind.css",
 ]
 script = [
-
+   
 ]
 
 [web.resource.dev]
