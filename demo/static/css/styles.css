@@ -1,0 +1,16 @@
+
+:root {
+
+    --color-primary: #000000;
+}
+
+body {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    min-width: 100%;
+    padding: 0;
+}
