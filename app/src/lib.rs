@@ -18,6 +18,10 @@ use dioxus_router::{Route, Router};
 
 pub fn app(cx: Scope<ApplicationScope>) -> Element {
     cx.render(rsx! {
+        head {
+            link { rel: "stylesheet", href: "https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" },
+            script { src: "https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp" }
+        }
         Router {
             Route { to: "/", self::routes::Homepage(cx.clone()) },
             Route { to: "/dashboard", self::routes::dash::Dashboard(cx.clone()) },

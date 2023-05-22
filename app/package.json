@@ -25,9 +25,10 @@
   "readme": "https://github.com/FL03/template-rs-dioxus/#README",
   "repository": "https://github.com/FL03/template-rs-dioxus",
   "scripts": {
-    "build": "tsc && npm run trunk:build",
+    "build": "tsc && npm run rust:build",
     "start": "trunk serve",
-    "trunk:build": "trunk build"
+    "rust:build": "dioxus build",
+    "rust:dev": "dioxus serve"
   },
   "type": "module",
   "version": "0.1.0"

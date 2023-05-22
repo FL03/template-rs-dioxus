@@ -1,23 +1,26 @@
 [application]
 asset_dir = "static"
 default_platform = "web"
-name = "Gambit"
+name = "Template"
 out_dir = "dist"
 
 [web.app]
-title = "Gambit"
+title = "Template"
 
 [web.watcher]
 index_on_404 = true
-watch_path = ["src"]
+watch_path = [
+    "static",
+    "src",
+]
 
 [web.resource]
 style = [
-    "static/app.css",
-    "static/tailwind.css",
+    "css/app.css",
+    "css/tailwind.css",
 ]
 script = [
-    "static/js/app.js",
+
 ]
 
 [web.resource.dev]
