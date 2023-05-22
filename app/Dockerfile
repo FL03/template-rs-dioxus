@@ -1,4 +1,4 @@
-FROM jo3mccain/trunkrs:latest as builder
+FROM jo3mccain/dioxus:latest as builder
 
 ENV CARGO_TERM_COLOR=always
 
@@ -6,15 +6,15 @@ ADD . /workspace
 WORKDIR /workspace
 
 COPY . .
-RUN trunk build --release
+RUN dioxus build --release
 
 FROM builder as development
 
-ENV TRUNK_SERVE_PORT=80
+ENV PORT=8080
 
-EXPOSE ${TRUNK_SERVE_PORT}
+EXPOSE ${PORT}
 
-ENTRYPOINT [ "trunk" ]
+ENTRYPOINT [ "dioxus" ]
 CMD [ "serve" ]
 
 FROM nginx:alpine-slim as production
