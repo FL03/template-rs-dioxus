@@ -5,4 +5,6 @@
 pub use self::linked::*;
 
 pub mod clickable;
+pub mod theme_toggle;
+
 mod linked;

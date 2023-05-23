@@ -30,3 +30,11 @@ pub fn app(cx: Scope<ApplicationScope>) -> Element {
     })
 }
 
+// fn HeadElements(cx: Scope) -> Element {
+//     cx.render(rsx! {
+//         dioxus_helmet::Helmet {
+//             link { rel: "icon", href: "media/favicon.jpg"}
+//             title { "Helmet" }
+//         }
+//     })
+// }
