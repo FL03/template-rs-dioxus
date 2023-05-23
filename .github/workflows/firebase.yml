@@ -30,7 +30,7 @@ jobs:
   publisher:
     environment:
       name: production
-      url: https://${{ env.FIREBASE_PID }}.firebaseapp.com
+      url: https://${{ github.event.repository.name }}.firebaseapp.com
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
