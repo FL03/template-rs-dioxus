@@ -6,7 +6,7 @@ ADD . /workspace
 WORKDIR /workspace
 
 COPY . .
-RUN dioxus build --release
+RUN dioxus build --features web --platform web --release
 
 FROM builder as development
 

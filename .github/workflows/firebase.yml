@@ -41,7 +41,7 @@ jobs:
       - name: Setup (dioxus)
         run: cargo install dioxus-cli wasm-bindgen-cli
       - name: Build
-        run: cd app && dioxus build --release
+        run: cd app && dioxus build --features web --platform web --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           channelId: ${{ env.CHANNEL }}

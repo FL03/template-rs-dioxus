@@ -40,7 +40,7 @@ jobs:
       - name: Setup (dioxus)
         run: cargo install dioxus-cli wasm-bindgen-cli
       - name: Build
-        run: cd app && dioxus build --release
+        run: cd app && dioxus build --features web --platform web --release
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v1
         with:
