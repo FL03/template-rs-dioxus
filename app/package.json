@@ -5,9 +5,7 @@
     "url": "https://github.com/FL03"
   },
   "bugs": "https://github.com/FL03/template-rs-dioxus/issues",
-  "dependencies": {
-    "cookie": "latest"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@popperjs/core": "latest",
     "@tailwindcss/forms": "latest",
