@@ -94,7 +94,7 @@ optional = true
 version = "0.3"
 
 [dev-dependencies]
-[target.'cfg(target_family = "wasm")'.dev-dependencies]
+[target.wasm32-unknown-unknown.dev-dependencies]
 wasm-bindgen-test = "0.3"
 
 [package.metadata.docs.rs]
@@ -102,5 +102,8 @@ all-features = true
 rustc-args = ["--cfg", "docsrs"]
 
 [target.wasm32-unknown-unknown]
+
+[target.wasm32-unknown-unknown.dependencies]
+dioxus-web = { features = ["hydrate"], version = "0.3" }
 
 [target.wasm32-wasi]

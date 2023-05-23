@@ -17,10 +17,11 @@ watch_path = [
 [web.resource]
 style = [
     "css/app.css",
-    "css/tailwind.css",
+    "css/tailwind.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
 ]
 script = [
-   
+   "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"
 ]
 
 [web.resource.dev]

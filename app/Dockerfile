@@ -15,7 +15,7 @@ ENV PORT=8080
 EXPOSE ${PORT}
 
 ENTRYPOINT [ "dioxus" ]
-CMD [ "serve" ]
+CMD [ "serve", "--release", "--port", "${PORT}" ]
 
 FROM nginx:alpine-slim as production
 
