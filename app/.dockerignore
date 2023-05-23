@@ -1,49 +1,17 @@
-# Artifacts
+# Dirs
+**/__pycache__/
+**/__sapper__/
+
+**/.DS_STORE/
 **/.artifacts/
 **/.docker/data/
-**/debug/
-**/dist/
-**/env/
-
-# IDEs
 **/.idea/
+**/.svelte-kit/
 **/.vscode/
 
-# Node
 **/build/
+**/debug/
+**/dist/
 **/node_modules/
-
-# Python
-**/__pycache__/
-**/.pytest_cache/
-**/venv/
-
-# Rust
-**/Cargo.lock
 **/target/
-
-**/*.bk
-**/*.bk.*
-
-# Svelte
-**/__sapper__/
-**/.DS_STORE/
-**/.svelte-kit/
-
-# Extensions
-**/*.csv
-**/*.csv.*
-
-**/*.db
-**/*.db.*
-
-**/*.db-*.*
-
-**/*.log
-**/*.log.*
-
-**/*.whl
-**/*.whl.*
-
-**/*.zip
-**/*.zip.*
+**/venv/

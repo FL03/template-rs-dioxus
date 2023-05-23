@@ -1,0 +1,31 @@
+[application]
+asset_dir = "static"
+default_platform = "web"
+name = "Template"
+out_dir = "dist"
+
+[web.app]
+title = "Template"
+
+[web.watcher]
+index_on_404 = true
+watch_path = [
+    "static",
+    "src",
+]
+
+[web.resource]
+style = [
+    "css/app.css",
+    "css/tailwind.css",
+]
+script = [
+   
+]
+
+[web.resource.dev]
+script = []
+
+[application.plugins]
+available = true
+required = []

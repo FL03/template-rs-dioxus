@@ -9,18 +9,22 @@
         referrerpolicy="no-referrer"
         rel="stylesheet"
     />
-    <link data-trunk rel="icon" href="public/media/favicon.jpg"/>
-    <link data-trunk rel="css" href="public/app.css"/>
-    <link data-trunk rel="css" href="public/tailwind.css"/>
+    <link data-trunk rel="icon" href="static/media/favicon.jpg"/>
+    <link data-trunk rel="css" href="static/css/app.css"/>
+    <link data-trunk rel="css" href="static/css/tailwind.css"/>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <title>
-      template-rs-dioxide
-    </title>
+    <title>Template</title>
+    <!-- Scripts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   </head>
   <body>
     <div id="main"></div>
+    <script defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTyELyLAMZB9yFQK8SM5iZTjEJd3d0bHg&callback=initMap&libraries=visualization&v=weekly">
+    </script>
     <script 
         crossorigin="anonymous" 
         integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="

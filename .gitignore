@@ -3,6 +3,7 @@
 **/.cache/
 **/.dist/
 **/.docker/data/
+**/.firebase/
 **/.pkg/
 
 **/artifacts/
