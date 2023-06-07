@@ -10,7 +10,7 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn starter(scope: ApplicationScope) -> anyhow::Result<()> {
-    #[cfg(feature = "wasm")]
+    #[cfg(feature = "web")]
     dioxus_web::launch_with_props(app, scope, dioxus_web::Config::new().hydrate(true));
     #[cfg(feature = "desktop")]
     dioxus_desktop::launch_with_props(app, scope, dioxus_desktop::Config::new());

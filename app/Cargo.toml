@@ -21,10 +21,10 @@ default = [
 ]
 
 desktop = [
-    "dioxus-desktop/default"
+    "dioxus-desktop"
 ]
 ssr = [
-
+    "tokio/full"
 ]
 web = [
     "dioxus-router/web",
@@ -37,11 +37,12 @@ wasi = []
 
 wasm = [
     "js-sys",
-    "wasm-bindgen/serde-serialize",
+    "wasm-bindgen",
+    "wasm-bindgen-futures",
     "web-sys"
 ]
 wasm-ext = [
-    "wasm-bindgen-futures",
+    "gloo",
     "wasm-logger"
 ]
 
@@ -58,11 +59,12 @@ anyhow = "1"
 base64 = "0.21"
 bytes = "1.4"
 dioxus = "0.3"
-dioxus-router = { features = ["web"], version = "0.3" }
 dioxus-desktop = { optional = true, version = "0.3" }
+dioxus-helmet = "0.2"
+dioxus-router = { features = ["web"], version = "0.3" }
 dioxus-web = { features = ["hydrate"], optional = true, version = "0.3" }
 futures = "0.3"
-gloo = { features = [ "futures" ], version = "0.8" }
+gloo = { features = [ "futures" ], optional = true, version = "0.8" }
 js-sys = { features = [], optional = true, version = "0.3" }
 log = "0.4"
 oauth2 = "4.3"
@@ -73,10 +75,9 @@ strum = { features = ["derive"], version = "0.24" }
 smart-default = "0.7"
 tokio = { features = ["full"], optional = true, version = "1" }
 
-# WebAssembly (emscripten)
 wasm-bindgen = { features = [ "serde-serialize" ], optional = true, version = "0.2" }
 wasm-bindgen-futures = { optional = true, version = "0.4"}
-wasm-logger = {optional = true, version = "0.2"}
+wasm-logger = { optional = true, version = "0.2"}
 
 [dependencies.web-sys]
 features = [
@@ -94,13 +95,15 @@ optional = true
 version = "0.3"
 
 [dev-dependencies]
-[target.'cfg(target_family = "wasm")'.dev-dependencies]
-wasm-bindgen-test = "0.3"
+
 
 [package.metadata.docs.rs]
 all-features = true
 rustc-args = ["--cfg", "docsrs"]
 
 [target.wasm32-unknown-unknown]
+
+[target.wasm32-unknown-unknown.dev-dependencies]
+wasm-bindgen-test = "0.3"
 
 [target.wasm32-wasi]

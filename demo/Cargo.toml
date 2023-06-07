@@ -43,3 +43,5 @@ axum = { features = [], optional = true, version = "0.6" }
 tokio = { features = ["full"], optional = true, version = "1" }
 
 # dioxus-web = { features = ["hydrate"], optional = true, version = "0.3" }
+[target.wasm32-unknown-unknown.dependencies]
+dioxus-web = { features = ["hydrate"], version = "0.3" }

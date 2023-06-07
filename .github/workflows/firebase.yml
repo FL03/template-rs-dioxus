@@ -6,12 +6,12 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  FIREBASE_PID: curiosity-2f6e1
+  CHANNEL: live
+  FIREBASE_PID: svkcl-d7eb1
   RUST_BACKTRACE: full
 
 on:
   push:
-    branches: [ main ]
     tags: [ v*.*.* ]
   release:
     types: [ published ]
@@ -29,21 +29,21 @@ jobs:
   publisher:
     environment:
       name: production
-      url: https://${{ env.FIREBASE_PID }}.web.app
+      url: https://${{ github.event.repository.name }}.firebaseapp.com
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup (Rust)
         run: |
           rustup default nightly
-          rustup target add wasm32-unknown-unknown --toolchain nightly
-      - name: Setup (trunk)
-        run: cargo install trunk wasm-bindgen-cli
+          rustup target add wasm32-unknown-unknown wasm32-wasi --toolchain nightly
+      - name: Setup (dioxus)
+        run: cargo install dioxus-cli wasm-bindgen-cli
       - name: Build
-        run: trunk --config app/Trunk.toml build --release
+        run: cd app && dioxus build --features web --platform web --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          channelId: live
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CURIOSITY_2F6E1 }}'
+          channelId: ${{ env.CHANNEL }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SVKCL_D7EB1 }}
           projectId: ${{ env.FIREBASE_PID }}
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
