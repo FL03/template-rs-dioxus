@@ -35,7 +35,7 @@ dioxus-ssr = { optional = true, version = "0.3" }
 dioxus-web = { features = ["hydrate"], version = "0.3" }
 serde = { features = ["derive"], version = "1" }
 serde_json = "1"
-strum = { features = ["derive"], version = "0.24" }
+strum = { features = ["derive"], version = "0.25" }
 smart-default = "0.7"
 
 
