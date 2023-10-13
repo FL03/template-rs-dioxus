@@ -42,7 +42,7 @@ jobs:
       - name: Build
         run: cd app && dioxus build --features web --platform web --release
       - name: Upload artifacts
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: app/dist
   deploy:
