@@ -32,7 +32,7 @@ jobs:
       url: https://${{ github.event.repository.name }}.firebaseapp.com
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup (Rust)
         run: |
           rustup default nightly
