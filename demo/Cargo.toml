@@ -27,7 +27,7 @@ wasm = []
 [dependencies]
 anyhow = "1"
 cfg-if = "1"
-dioxus = "0.3"
+dioxus = "0.4"
 dioxus-desktop = { optional = true, version = "0.3" }
 dioxus-router = { features = ["web"], version = "0.3" }
 dioxus-ssr = { optional = true, version = "0.3" }
