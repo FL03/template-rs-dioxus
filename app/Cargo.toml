@@ -62,7 +62,7 @@ dioxus = "0.3"
 dioxus-desktop = { optional = true, version = "0.3" }
 dioxus-helmet = "0.2"
 dioxus-router = { features = ["web"], version = "0.3" }
-dioxus-web = { features = ["hydrate"], optional = true, version = "0.3" }
+dioxus-web = { features = ["hydrate"], optional = true, version = "0.4" }
 futures = "0.3"
 gloo = { features = [ "futures" ], optional = true, version = "0.8" }
 js-sys = { features = [], optional = true, version = "0.3" }
