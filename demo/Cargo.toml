@@ -30,7 +30,7 @@ cfg-if = "1"
 dioxus = "0.3"
 dioxus-desktop = { optional = true, version = "0.3" }
 dioxus-router = { features = ["web"], version = "0.3" }
-dioxus-ssr = { optional = true, version = "0.3" }
+dioxus-ssr = { optional = true, version = "0.4" }
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 dioxus-web = { features = ["hydrate"], version = "0.3" }
 serde = { features = ["derive"], version = "1" }
