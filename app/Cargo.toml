@@ -59,7 +59,7 @@ anyhow = "1"
 base64 = "0.21"
 bytes = "1.4"
 dioxus = "0.3"
-dioxus-desktop = { optional = true, version = "0.3" }
+dioxus-desktop = { optional = true, version = "0.4" }
 dioxus-helmet = "0.2"
 dioxus-router = { features = ["web"], version = "0.3" }
 dioxus-web = { features = ["hydrate"], optional = true, version = "0.3" }
