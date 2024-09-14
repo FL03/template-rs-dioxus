@@ -1,43 +1,26 @@
 [application]
-
-# App (Project) Name
-name = "template-rs-dioxus"
-
-# Dioxus App Default Platform
-# web, desktop, fullstack
+asset_dir = "assets"
 default_platform = "web"
-
-# `build` & `serve` dist path
+name = "template-rs-dioxus"
 out_dir = "dist"
 
-# resource (assets) file folder
-asset_dir = "assets"
-
 [web.app]
-
-# HTML title tag content
 title = "template-rs-dioxus"
 
 [web.watcher]
-
-# when watcher trigger, regenerate the `index.html`
 reload_html = true
+watch_path = [
+    "assets",
+    "src",
+]
 
-# which files or dirs will be watcher monitoring
-watch_path = ["src", "assets"]
-
-# include `assets` in web platform
 [web.resource]
-
-# CSS style file
-
-style = ["/tailwind.css"]
-
-# Javascript code file
 script = []
+
+style = [
+    "/tailwind.css",
+]
 
 [web.resource.dev]
 
-# Javascript code file
-# serve: [dev-server] only
 script = []
