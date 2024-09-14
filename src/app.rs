@@ -9,7 +9,7 @@ mod ctx;
 mod settings;
 
 use crate::cmp::Navbar;
-use crate::routes::Route;
+use crate::routes::*;
 use dioxus::prelude::*;
 
 pub fn App() -> Element {
@@ -20,16 +20,8 @@ pub fn App() -> Element {
     rsx! {
         div {
             class: "flex min-h-screen min-w-screen m-0 p-0 shadow text-dark bg-zinc-300 dark:bg-zinc-900 dark:text-white",
-            
             div {
                 class: "container mx-auto ",
-                Navbar {
-                    links: vec![
-                        rsx! { Link { to: Route::Home {}, "Home" } },
-                        rsx! { Link { to: Route::Tasks {}, "Tasks" } },
-                    ],
-                    title: "Dioxus"
-                }
                 Router::<Route> {}
             }
         }

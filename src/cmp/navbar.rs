@@ -8,25 +8,25 @@ use dioxus::prelude::*;
 pub fn Navbar(links: Vec<Element>, title: String) -> Element {
     rsx! {
             div {
-                class: "container mx-auto p-4 bg-transparent",
+                class: "block width-screen mx-auto p-4 bg-transparent",
                 nav {
                     class: "flex justify-between shadow rounded p-4",
                     div {
-                        class: "flex text-start",
+                        class: "flex flex-shrink text-start",
                         Link {
                             to: "/" {},
                             "{title}"
                         }
                     }
                     div {
-                        class: "flex flex-grow justify-end",
+                        class: "flex flex-grow centered",
                         ul {
-                            class: "block",
+                            class: "flex",
                             {{
                                 links.iter().cloned().map(|link| {
                                     rsx! {
                                         li {
-                                            class: "mx-2",
+                                            class: "block mx-2",
                                             {link}
                                         }
                                     }
@@ -35,7 +35,7 @@ pub fn Navbar(links: Vec<Element>, title: String) -> Element {
                         }
                     }
                     div {
-                        class: "flex center",
+                        class: "flex centered",
                         Link {
                             to: "/profile" {},
                             "Profile"
