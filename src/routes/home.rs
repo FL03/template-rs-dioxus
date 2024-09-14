@@ -2,7 +2,7 @@
     Appellation: home <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-use crate::app::Route;
+use super::Route;
 use dioxus::prelude::*;
 
 #[component]

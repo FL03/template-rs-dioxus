@@ -5,7 +5,7 @@
 #![allow(non_snake_case)]
 
 pub mod app;
-pub mod screens;
+pub mod routes;
 
 use dioxus::prelude::*;
 use dioxus_logger::tracing::{info, Level};
