@@ -10,9 +10,9 @@ pub fn Home() -> Element {
 
     rsx! {
         div {
-            class: "container mx-auto p-4",
+            class: "flex flex-col centered",
             div {
-                class: "flex text-center p-4",
+                class: "rounded bg-zinc-700",
                 h1 { "High-Five counter: {count}" }
                 button { onclick: move |_| count += 1, "Up high!" }
                 button { onclick: move |_| count -= 1, "Down low!" }

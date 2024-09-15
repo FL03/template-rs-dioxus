@@ -2,25 +2,20 @@
 asset_dir = "assets"
 default_platform = "web"
 name = "template-rs-dioxus"
-out_dir = "dist"
+out_dir = "docs"
 
 [web.app]
+base_path = "template-rs-dioxus"
 title = "template-rs-dioxus"
 
 [web.watcher]
 reload_html = true
-watch_path = [
-    "assets",
-    "src",
-]
+watch_path = ["assets", "src"]
 
 [web.resource]
 script = []
 
-style = [
-    "/tailwind.css",
-]
+style = ["/tailwind.css"]
 
 [web.resource.dev]
-
 script = []

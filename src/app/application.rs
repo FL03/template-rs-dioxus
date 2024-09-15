@@ -15,9 +15,9 @@ pub fn App() -> Element {
 
     rsx! {
         div {
-            class: "flex min-h-screen min-w-screen m-0 p-0 shadow text-dark bg-zinc-300 dark:bg-zinc-900 dark:text-white",
+            class: "flex min-h-screen min-w-screen m-0 p-0 text-dark bg-zinc-300 dark:bg-zinc-900 dark:text-white",
             div {
-                class: "container mx-auto ",
+                class: "container mx-auto",
                 Router::<Route> {}
             }
         }

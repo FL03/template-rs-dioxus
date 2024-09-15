@@ -52,5 +52,5 @@ jobs:
         with:
           branch: gh-pages
           clean: false
-          folder: ${{ env.WORKDIR }}/${{ env.OUTDIR }}
+          folder: docs
           

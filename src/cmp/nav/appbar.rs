@@ -8,9 +8,9 @@ use dioxus::prelude::*;
 pub fn AppBar(links: Vec<Element>, title: String) -> Element {
     rsx! {
         div {
-            class: "container mx-auto p-4 bg-transparent",
+            class: "block items-center max-w-screen bg-transparent",
             nav {
-                class: "flex items-center justify-between shadow rounded-lg p-4",
+                class: "flex flex-nowrap items-center justify-between shadow rounded-lg p-4",
                 div {
                     class: "flex flex-shrink text-start",
                     Link {
@@ -36,7 +36,7 @@ pub fn AppBar(links: Vec<Element>, title: String) -> Element {
                     div {
                         class: "flex flex-shrink centered",
                         button {
-                            class: "block mx-2",
+                            class: "block mx-2 px-2 rounded-lg shadow text-dark bg-gradient-to-r from-cyan-700 to-blue-700",
                             onclick: |_| {
                                 log::tracing::info!("Profile button clicked");
                             },

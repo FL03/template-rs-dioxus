@@ -6,8 +6,8 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     use dioxus_logger::tracing;
     // Init logger
-    dioxus_logger::init(tracing::Level::INFO).expect("failed to init logger");
-    tracing::info!("starting app");
+    dioxus_logger::init(tracing::Level::TRACE)?;
+    tracing::info!("Starting the application...");
     dioxus::launch(sdk::App);
 
     Ok(())
