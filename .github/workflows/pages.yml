@@ -45,7 +45,7 @@ jobs:
         run: |
           cd ${{ env.WORKDIR }}
           dx build --release
-          mv ${{ env.OUTDIR }} docs
+          mv dist docs
           mv ./docs/index.html ./docs/404.html
       - name: publish
         uses: JamesIves/github-pages-deploy-action@v4
