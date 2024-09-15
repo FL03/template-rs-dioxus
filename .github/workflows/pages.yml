@@ -23,13 +23,10 @@ permissions: write-all
 jobs:
   pages:
     env:
-      RUST_TOOLCHAIN: stable
+      RUST_TOOLCHAIN: nightly
       OUTDIR: dist
       WORKDIR: .
     name: GitHub Pages
-    strategy:
-      matrix:
-        toolchain: [ stable ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

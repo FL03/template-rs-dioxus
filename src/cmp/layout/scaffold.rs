@@ -4,7 +4,7 @@
 */
 
 use crate::cmp::AppBar;
-use crate::{Route, APP_NAME};
+use crate::Route;
 use dioxus::prelude::*;
 
 #[component]
@@ -17,4 +17,19 @@ pub fn Scaffold(title: String) -> Element {
         AppBar { links, title }
         main { class: "flex flex-col min-h-full", Outlet::<crate::Route> {} }
     }
+}
+
+
+pub enum Links {
+    Route(Route),
+    String(String)
+}
+
+pub struct Hyperlink {
+    pub to: Links,
+    pub children: String,
+}
+
+pub struct LinkTree {
+    pub links: Vec<Hyperlink>,
 }
