@@ -5,12 +5,8 @@ ADD . .
 
 RUN dx build --release
 
-FROM builder as debug
+FROM builder AS debug
 
-RUN dx serve
+EXPOSE 8080
 
-FROM alpine:latest
-
-COPY --from=builder /app/dist/ /app/
-
-
+RUN dx serve --release --port 8080
