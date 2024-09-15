@@ -8,12 +8,13 @@ pub use self::{ctx::Context, settings::*};
 mod ctx;
 mod settings;
 
-use crate::cmp::Navbar;
 use crate::routes::*;
+use crate::types::Timestamp;
 use dioxus::prelude::*;
 
 pub fn App() -> Element {
-    use_context_provider(|| Signal::new(Context::default()));
+    use_context_provider(|| Signal::new(Settings::default()));
+    use_context_provider(|| Signal::new(Timestamp::now()));
     use_context_provider(|| Signal::new(crate::SAMPLE_PROFILES.clone()));
     use_context_provider(|| Signal::new(crate::SAMPLE_TASKS.clone()));
 

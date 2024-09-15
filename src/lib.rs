@@ -15,8 +15,12 @@ pub mod types;
 
 use data::{Profile, Task};
 
+extern crate dioxus_logger as log;
+
 // Urls are relative to your Cargo.toml file
 const _TAILWIND_URL: &str = manganis::mg!(file("assets/tailwind.css"));
+
+pub const TITLE: &str = "RMS";
 
 lazy_static::lazy_static! {
     static ref SAMPLE_PROFILES: Vec<Profile> = vec![

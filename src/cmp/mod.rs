@@ -4,10 +4,16 @@
 */
 //! Components (cmp)
 #[doc(inline)]
-pub use self::navbar::Navbar;
+pub use self::nav::*;
 
-pub mod navbar;
+pub mod nav {
+    #[doc(inline)]
+    pub use self::{appbar::AppBar, navbar::Navbar};
+
+    mod appbar;
+    mod navbar;
+}
 
 pub(crate) mod prelude {
-    pub use super::navbar::Navbar;
+    pub use super::nav::*;
 }
