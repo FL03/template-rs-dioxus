@@ -35,13 +35,13 @@ pub fn Tasks() -> Element {
                         }}
                     }
                 }
-                div { class: "dark:bg-zinc-700 shadow rounded-lg p-4",
+                div { class: "bg-zinc-700 shadow rounded-lg p-4",
                     h2 { class: "text-xl font-semibold mb-4", "Tasks" }
                     table { class: "w-full",
                         thead {
                             tr {
                                 th { class: "text-left", "Task" }
-                                th { class: "text-left", "Assigned To" }
+                                th { class: "text-left", "Assignees" }
                                 th { class: "text-left", "Status" }
                             }
                         }
@@ -50,15 +50,17 @@ pub fn Tasks() -> Element {
                                 tasks.read().iter().map(|task| {
                                     rsx! {
                                         tr {
-                                            td { "{task.description}" }
+                                            td { "{task.name}" }
                                             td {
                                                 select {
+                                                    class: "text-dark",
                                                     onchange: move |_evt| {},
                                                     option { value: "", "Unassigned" }
                                                     {{
                                                         users.read().iter().map(|employee| {
                                                             rsx! {
                                                                 option {
+                                                                    class: "text-dark",
                                                                     value: "{employee.id()}",
                                                                     selected: "{task.assignees().contains(&employee.id)}",
                                                                     "{employee.name()}"

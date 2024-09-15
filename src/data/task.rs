@@ -69,6 +69,23 @@ impl Task {
     }
 
     pub fn complete(&mut self) {
+        self.on_update();
         self.completed = true;
+        self.completed_at = Some(Timestamp::now());
+    }
+
+    pub fn uncomplete(&mut self) {
+        self.on_update();
+        self.completed = false;
+        self.completed_at = None;
+    }
+
+    pub fn describe(&mut self, description: impl ToString) {
+        self.on_update();
+        self.description = description.to_string();
+    }
+
+    fn on_update(&mut self) {
+        self.updated_at = Timestamp::now();
     }
 }

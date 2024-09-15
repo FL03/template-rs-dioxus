@@ -3,6 +3,25 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 
+// pub trait Wrapper<T> {
+
+//     fn get(self) -> T;
+
+//     fn get_ref(&self) -> &T;
+
+//     fn get_mut(&mut self) -> &mut T;
+
+//     fn map<F>(self, f: F) -> Self
+//     where
+//         F: FnOnce(T) -> T;
+
+//     fn replace(&mut self, value: T) -> T;
+
+//     fn set(&mut self, value: T);
+
+//     fn with(self, value: T) -> Self;
+// }
+
 macro_rules! wrapper {
     (@decl $(#[derive($($d:ident),*)])? $vis:vis $name:ident($item:ty)) => {
 
@@ -13,7 +32,7 @@ macro_rules! wrapper {
     };
     (@impl $name:ident($item:ty)) => {
         impl $name {
-            pub fn new(value: $item) -> Self {
+            pub fn from_value(value: $item) -> Self {
                 Self(value)
             }
 

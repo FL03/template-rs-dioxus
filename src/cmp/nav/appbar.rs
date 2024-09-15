@@ -8,7 +8,7 @@ use dioxus::prelude::*;
 pub fn AppBar(links: Vec<Element>, title: String) -> Element {
     rsx! {
         div {
-            class: "block items-center max-w-screen bg-transparent",
+            class: "block items-center max-w-screen",
             nav {
                 class: "flex flex-nowrap items-center justify-between shadow rounded-lg p-4",
                 div {

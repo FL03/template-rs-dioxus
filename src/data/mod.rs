@@ -2,8 +2,9 @@
     Appellation: data <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-
+#[doc(inline)]
 pub use self::{profile::*, task::*};
+pub(crate) use self::types::*;
 
 pub mod profile;
 pub mod task;
@@ -13,8 +14,12 @@ pub(crate) mod prelude {
     pub use super::task::Task;
 }
 
-pub(crate) type Id = String;
 
-pub(crate) type Uid = uuid::Uuid;
+#[allow(unused)]
+pub(crate) mod types {
+    pub(crate) type Id = String;
 
-pub(crate) type Date = chrono::DateTime<chrono::Utc>;
+    pub(crate) type Uid = uuid::Uuid;
+
+    pub(crate) type Date = chrono::DateTime<chrono::Utc>;
+}

@@ -57,7 +57,7 @@ impl Default for Settings {
     fn default() -> Self {
         Self {
             theme: ThemeMode::Light,
-            title: crate::TITLE.to_string(),
+            title: crate::APP_NAME.to_string(),
             version: env!("CARGO_PKG_VERSION").to_string(),
         }
     }
