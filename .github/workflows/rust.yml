@@ -21,8 +21,8 @@ on:
 permissions: write-all
 
 jobs:
-  workspace:
-    name: Workspace
+  web:
+    name: web
     strategy:
       matrix:
         platform: [ macos-latest, ubuntu-latest, windows-latest ]
@@ -30,17 +30,13 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-      - name: setup (rustup)
+      - name: rustup
         run: |
           rustup default ${{ matrix.toolchain }}
+          rustup component add wasm32-unknown-unknown
           rustup update
-      - name: build (workspace)
-        run: cargo build --all-features -r -v --workspace
-      - name: test (workspace)
-        run: cargo test --all-features -v --workspace
-      - name: bench (workspace)
-        if: matrix.toolchain == 'nightly'
-        run: cargo bench -F full -v --workspace
+      - name: build
+        run: cargo build --all-features -r -v --workspace --target wasm32-unknown-unknown
       - name: cache
         uses: actions/cache@v4
         with:
@@ -48,7 +44,10 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
+            target/debug
             target/release
+            target/wasm32-unknown-unknown/debug
+            target/wasm32-unknown-unknown/release
           restore-keys: |
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
