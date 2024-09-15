@@ -16,3 +16,5 @@ pub(crate) mod prelude {
 pub(crate) type Id = String;
 
 pub(crate) type Uid = uuid::Uuid;
+
+pub(crate) type Date = chrono::DateTime<chrono::Utc>;

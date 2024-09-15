@@ -21,7 +21,7 @@ use data::{Profile, Task};
 extern crate dioxus_logger as log;
 
 // Urls are relative to your Cargo.toml file
-const _TAILWIND_URL: &str = manganis::mg!(file("assets/tailwind.css"));
+const _TAILWIND_URL: &str = manganis::mg!(file("tailwind.css"));
 
 pub const TITLE: &str = "RMS";
 
@@ -36,11 +36,11 @@ lazy_static::lazy_static! {
     ];
 
     static ref SAMPLE_TASKS: Vec<Task> = vec![
-        Task::new("Alice's Task", "Do this"),
-        Task::new("Bob's Task", "Complete another task"),
-        Task::new("Charlie's Task", "Notify the team"),
-        Task::new("David's Task", "Create the report"),
-        Task::new("Eve's Task", "Summarize the data"),
+        Task::new("Do this"),
+        Task::new("Complete another task"),
+        Task::new("Notify the team"),
+        Task::new("Create the report"),
+        Task::new("Summarize the data"),
     ];
 }
 

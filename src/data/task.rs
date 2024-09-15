@@ -3,6 +3,7 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 use super::Id;
+use crate::types::Timestamp;
 
 #[derive(
     Clone,
@@ -18,20 +19,32 @@ use super::Id;
 )]
 pub struct Task {
     pub(crate) id: Id,
+    pub(crate) assignees: Vec<Id>,
     pub(crate) completed: bool,
     pub(crate) description: String,
-    pub(crate) label: String,
-    pub(crate) assignees: Vec<Id>,
+    pub(crate) name: String,
+    pub(crate) notes: Vec<String>,
+    pub(crate) priority: u8,
+    pub(crate) tags: Vec<String>,
+    pub(crate) completed_at: Option<Timestamp>,
+    pub(crate) created_at: Timestamp,
+    pub(crate) updated_at: Timestamp,
 }
 
 impl Task {
-    pub fn new(label: impl ToString, description: impl ToString) -> Self {
+    pub fn new(name: impl ToString) -> Self {
         Self {
             id: uuid::Uuid::new_v4().to_string(),
             assignees: Vec::new(),
             completed: false,
-            description: description.to_string(),
-            label: label.to_string(),
+            description: String::new(),
+            name: name.to_string(),
+            notes: Vec::new(),
+            priority: 0,
+            tags: Vec::new(),
+            completed_at: None,
+            created_at: Timestamp::now(),
+            updated_at: Timestamp::now(),
         }
     }
 
