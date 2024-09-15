@@ -6,7 +6,6 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  ARTIFACTS: dist
 
 on:
   pull_request:
@@ -22,9 +21,9 @@ on:
 permissions: write-all
 
 jobs:
-
   pages:
     env:
+      RUST_TOOLCHAIN: stable
       OUTDIR: dist
       WORKDIR: .
     name: GitHub Pages
@@ -34,25 +33,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          profile: minimal
-          target: wasm32-unknown-unknown
-          toolchain: ${{ matrix.toolchain }}
+      - name: rustup
+        run: |
+          rustup default ${{ env.RUST_TOOLCHAIN }}
+          rustup component add wasm32-unknown-unknown
+          rustup update
       - uses: Swatinem/rust-cache@v2
-      - name: Install Dioxus-CLI
+      - name: install dioxus-cli
         run: cargo install dioxus-cli
+      - name: tailwindcss
+        run: |
+          npm install -g tailwindcss
+          npx tailwindcss -i ./input.css -o ./assets/tailwind.css --minify
       - name: build
         run: |
           rm Dioxus.toml
           mv .config/Dioxus.pages.toml Dioxus.toml
           dx build --release
           mv ./docs/index.html ./docs/404.html
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-cargo-${{ env.RUST_TOOLCHAIN }}-${{ hashFiles('**/Cargo.lock') }}
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/wasm32-unknown-unknown/release
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ env.RUST_TOOLCHAIN }}-
+            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-
       - name: publish
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           clean: false
           folder: docs
-          

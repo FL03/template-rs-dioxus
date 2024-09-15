@@ -8,8 +8,7 @@ use dioxus::prelude::*;
 #[component]
 pub fn Badge(background: String, color: String, text: String) -> Element {
     rsx! {
-        span {
-            class: "inline-flex items-center px-2 py-1 rounded-md font-medium text-xs {background} {color} ring-1 ring-inset ring-gray-500/10",
+        span { class: "inline-flex items-center px-2 py-1 rounded-md font-medium text-xs {background} {color} ring-1 ring-inset ring-gray-500/10",
             {text}
         }
     }

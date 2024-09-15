@@ -7,9 +7,6 @@ use dioxus::prelude::*;
 #[component]
 pub fn Card(child: Element) -> Element {
     rsx! {
-        div {
-            class: "bg-white shadow-md rounded-lg p-6",
-            {child}
-        }
+        div { class: "bg-white shadow-md rounded-lg p-6", {child} }
     }
 }

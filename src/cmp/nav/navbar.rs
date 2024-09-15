@@ -14,7 +14,7 @@ pub fn Navbar() -> Element {
     ];
     let title = APP_NAME.to_string();
     rsx! {
-        AppBar { links, title },
+        AppBar { links, title }
         Outlet::<crate::Route> {}
     }
 }

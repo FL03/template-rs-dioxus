@@ -16,11 +16,10 @@ pub fn Tasks() -> Element {
 
     rsx! {
         div {
-        div { class: "mb-6 p-4 dark:text-dark",
+            div { class: "mb-6 p-4 dark:text-dark",
                 h1 { class: "text-2xl font-bold", "Tasks" }
                 p { class: "text-sm text-gray-600", "{date.read()}" }
-                p { class: "text-sm text-gray-600",
-                }
+                p { class: "text-sm text-gray-600" }
             }
             div { class: "grid gap-6 md:grid-cols-2",
                 div { class: "bg-zinc-700 shadow rounded-lg p-4",
@@ -81,12 +80,10 @@ pub fn Tasks() -> Element {
                                     }
                                 })
                             }}
-
                         }
                     }
                 }
             }
         }
-
     }
 }
