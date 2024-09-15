@@ -2,10 +2,7 @@ name: docker
 
 on:
   pull_request:
-    branches-ignore: [ main ]
-  push:
-    branches-ignore: [ main ]
-    tags: [ v*.*.* ]
+    branches: [ main ]
   release:
     types: [ created ]
   repository_dispatch:

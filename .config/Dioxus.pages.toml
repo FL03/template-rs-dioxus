@@ -14,7 +14,6 @@ watch_path = ["assets", "src"]
 
 [web.resource]
 script = []
-
 style = ["/tailwind.css"]
 
 [web.resource.dev]

@@ -9,6 +9,8 @@ env:
   ARTIFACTS: dist
 
 on:
+  pull_request:
+    branches: [ main ]
   push:
     branches: [ main ]
   release:
@@ -43,9 +45,9 @@ jobs:
         run: cargo install dioxus-cli
       - name: build
         run: |
-          cd ${{ env.WORKDIR }}
+          rm Dioxus.toml
+          mv .config/Dioxus.pages.toml Dioxus.toml
           dx build --release
-          mv dist docs
           mv ./docs/index.html ./docs/404.html
       - name: publish
         uses: JamesIves/github-pages-deploy-action@v4
