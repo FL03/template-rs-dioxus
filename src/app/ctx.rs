@@ -58,6 +58,11 @@ impl Default for Context {
     }
 }
 
+impl core::fmt::Display for Context {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.write_str(serde_json::to_string(self).unwrap().as_str())
+    }
+}
 unsafe impl Send for Context {}
 
 unsafe impl Sync for Context {}

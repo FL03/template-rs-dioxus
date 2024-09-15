@@ -2,6 +2,7 @@
 authors = ["FL03 <jo3mccain@icloud.com>"]
 categories = []
 edition = "2021"
+homepage = "https://github.com/FL03/template-rs-dioxus/wiki"
 keywords = []
 license = "Apache-2.0"
 name = "template-rs-dioxus"

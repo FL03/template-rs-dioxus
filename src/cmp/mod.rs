@@ -4,16 +4,15 @@
 */
 //! Components (cmp)
 #[doc(inline)]
-pub use self::nav::*;
+pub use self::{
+    layout::Scaffold,
+    nav::{AppBar, Navbar},
+};
 
-pub mod nav {
-    #[doc(inline)]
-    pub use self::{appbar::AppBar, navbar::Navbar};
-
-    mod appbar;
-    mod navbar;
-}
+pub mod layout;
+pub mod nav;
 
 pub(crate) mod prelude {
-    pub use super::nav::*;
+    pub use super::layout::prelude::*;
+    pub use super::nav::prelude::*;
 }

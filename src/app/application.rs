@@ -2,14 +2,9 @@
     Appellation: app <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+use super::Settings;
 
-pub use self::{ctx::Context, settings::*};
-
-mod ctx;
-mod settings;
-
-use crate::routes::*;
-use crate::types::Timestamp;
+use crate::{Route, Timestamp};
 use dioxus::prelude::*;
 
 pub fn App() -> Element {

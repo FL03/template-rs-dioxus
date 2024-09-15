@@ -1,0 +1,56 @@
+name: pages
+
+concurrency: 
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CARGO_TERM_COLOR: always
+  ARTIFACTS: dist
+
+on:
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+  repository_dispatch:
+    types: [ pages ]
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+
+  pages:
+    env:
+      OUTDIR: dist
+      WORKDIR: .
+    name: GitHub Pages
+    strategy:
+      matrix:
+        toolchain: [ stable ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          override: true
+          profile: minimal
+          target: wasm32-unknown-unknown
+          toolchain: ${{ matrix.toolchain }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Install Dioxus-CLI
+        run: cargo install dioxus-cli
+      - name: build
+        run: |
+          cd ${{ env.WORKDIR }}
+          dx build --release
+          mv ${{ env.OUTDIR }} docs
+          mv ./docs/index.html ./docs/404.html
+      - name: publish
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          clean: false
+          folder: ${{ env.WORKDIR }}/${{ env.OUTDIR }}
+          

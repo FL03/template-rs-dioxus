@@ -1,0 +1,33 @@
+name: docker
+
+on:
+  pull_request:
+    branches-ignore: [ main ]
+  push:
+    branches-ignore: [ main ]
+    tags: [ v*.*.* ]
+  release:
+    types: [ created ]
+  repository_dispatch:
+    types: [ docker ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: hub.docker.com
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/setup-buildx-action@v3
+    - name: Publish
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      with:
+        context: .
+        dockerfile: .docker/Dockerfile
+        name: ${{ secrets.DOCKERHUB_USERNAME }}/template-rs-dioxus
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        platforms: linux/amd64
+        snapshot: true
+        username: ${{ secrets.DOCKERHUB_USERNAME }}

@@ -7,13 +7,6 @@ use crate::types::ThemeMode;
 #[derive(
     Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Deserialize, serde::Serialize,
 )]
-pub struct ThemeSettings {
-    pub mode: ThemeMode,
-}
-
-#[derive(
-    Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Deserialize, serde::Serialize,
-)]
 pub struct Settings {
     pub theme: ThemeMode,
     pub title: String,

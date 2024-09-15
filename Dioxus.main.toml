@@ -2,10 +2,9 @@
 asset_dir = "assets"
 default_platform = "web"
 name = "template-rs-dioxus"
-out_dir = "docs"
+out_dir = "dist"
 
 [web.app]
-base_path = "template-rs-dioxus"
 title = "template-rs-dioxus"
 
 [web.watcher]

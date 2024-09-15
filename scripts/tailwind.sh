@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-npx tailwindcss -i ./input.css -o ./assets/tailwind.css
+npx tailwindcss -i ./input.css -o ./assets/tailwind.css --watch

@@ -7,6 +7,9 @@
 #[doc(inline)]
 pub use self::{app::*, routes::Route, types::*};
 
+#[macro_use]
+pub(crate) mod macros;
+
 pub mod app;
 pub mod cmp;
 pub mod data;
@@ -42,7 +45,7 @@ lazy_static::lazy_static! {
 }
 
 pub mod prelude {
-    pub use super::app::*;
+    pub use super::app::prelude::*;
     pub use super::cmp::prelude::*;
     pub use super::data::prelude::*;
     pub use super::routes::prelude::*;
