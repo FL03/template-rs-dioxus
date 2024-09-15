@@ -22,34 +22,35 @@ permissions: write-all
 
 jobs:
   web:
+    env:
+      APP_PLATFORM: web
+      APP_TARGET: wasm32-unknown-unknown
     name: web
     strategy:
       matrix:
-        platform: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
         toolchain: [ stable, nightly ]
-    runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: rustup
         run: |
           rustup default ${{ matrix.toolchain }}
-          rustup component add wasm32-unknown-unknown
+          rustup component add ${{ env.APP_TARGET }}
           rustup update
       - name: build
-        run: cargo build --all-features -r -v --workspace --target wasm32-unknown-unknown
+        run: cargo build --all-features -r -v --workspace --target ${{ env.APP_TARGET }}
       - name: cache
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-${{ hashFiles('**/Cargo.lock') }}
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            target/debug
-            target/release
-            target/wasm32-unknown-unknown/debug
             target/wasm32-unknown-unknown/release
           restore-keys: |
-            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
+            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-${{ hashFiles('**/Cargo.lock') }}
+            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
             ${{ runner.os }}-cargo-
             ${{ runner.os }}-

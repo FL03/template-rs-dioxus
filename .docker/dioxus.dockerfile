@@ -1,6 +1,6 @@
 FROM rust:latest as builder-base
 
-RUN rustup default nightly && \
+RUN rustup default stable && \
     rustup target add wasm32-unknown-unknown && \
     rustup update
 

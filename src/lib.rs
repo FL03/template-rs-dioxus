@@ -36,11 +36,11 @@ lazy_static::lazy_static! {
     ];
 
     static ref SAMPLE_TASKS: Vec<Task> = vec![
-        Task::new("Alice's Task", "description"),
-        Task::new("Bob's Task", "description"),
-        Task::new("Charlie's Task", "description"),
-        Task::new("David's Task", "description"),
-        Task::new("Eve's Task", "description"),
+        Task::new("Alice's Task", "Do this"),
+        Task::new("Bob's Task", "Complete another task"),
+        Task::new("Charlie's Task", "Notify the team"),
+        Task::new("David's Task", "Create the report"),
+        Task::new("Eve's Task", "Summarize the data"),
     ];
 }
 
@@ -49,5 +49,5 @@ pub mod prelude {
     pub use super::cmp::prelude::*;
     pub use super::data::prelude::*;
     pub use super::routes::prelude::*;
-    pub use super::types::*;
+    pub use super::types::prelude::*;
 }

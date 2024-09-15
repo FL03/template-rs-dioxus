@@ -41,7 +41,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         context: .
-        dockerfile: .docker/Dockerfile
+        dockerfile: Dockerfile
         name: ${{ secrets.DOCKERHUB_USERNAME }}/template-rs-dioxus
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         platforms: linux/amd64
