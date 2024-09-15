@@ -31,7 +31,7 @@ jobs:
       - name: rustup
         run: |
           rustup default ${{ matrix.toolchain }}
-          rustup component add wasm32-unknown-unknown
+          rustup target add wasm32-unknown-unknown
           rustup update
       - name: builder
         run: cargo build --all-features -r -v --workspace

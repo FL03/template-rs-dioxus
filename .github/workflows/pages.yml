@@ -23,7 +23,7 @@ permissions: write-all
 jobs:
   pages:
     env:
-      RUST_TOOLCHAIN: nightly
+      RUST_TOOLCHAIN: stable
       OUTDIR: dist
       WORKDIR: .
     name: GitHub Pages
@@ -32,8 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: rustup
         run: |
-          rustup default ${{ env.RUST_TOOLCHAIN }}
-          rustup component add wasm32-unknown-unknown
+          rustup target add wasm32-unknown-unknown
           rustup update
       - uses: Swatinem/rust-cache@v2
       - name: install dioxus-cli

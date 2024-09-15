@@ -36,7 +36,7 @@ jobs:
       - name: rustup
         run: |
           rustup default ${{ matrix.toolchain }}
-          rustup component add ${{ env.APP_TARGET }}
+          rustup target add ${{ env.APP_TARGET }}
           rustup update
       - name: build
         run: cargo build --all-features -r -v --workspace --target ${{ env.APP_TARGET }}
