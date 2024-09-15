@@ -2,7 +2,8 @@
     Appellation: profile <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-use crate::types::{Id, Timestamp};
+use crate::types::{Id, Name, Timestamp};
+use std::collections::HashMap;
 
 #[derive(
     Clone,
@@ -17,7 +18,7 @@ use crate::types::{Id, Timestamp};
     serde::Serialize,
 )]
 pub struct Profile {
-    pub(crate) id: String,
+    pub(crate) id: Id,
     pub(crate) email: String,
     pub(crate) name: String,
     pub(crate) username: String,
@@ -28,7 +29,7 @@ pub struct Profile {
 impl Profile {
     pub fn new(name: impl ToString) -> Self {
         Self {
-            id: uuid::Uuid::new_v4().to_string(),
+            id: Id::v4(),
             name: name.to_string(),
             email: String::new(),
             username: String::new(),
@@ -45,3 +46,30 @@ impl Profile {
         &self.name
     }
 }
+
+pub struct Contact {
+    pub id: Id,
+    pub name: Name,
+    pub nickname: Option<String>,
+    pub department: Option<String>,
+    pub title: Option<String>,
+    pub email: HashMap<String, String>,
+    pub phone: HashMap<String, String>,
+    pub urls: HashMap<String, String>,
+    pub created_at: Timestamp,
+    pub updated_at: Timestamp,
+}
+
+#[derive(
+    Clone,
+    Debug,
+    Default,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    serde::Deserialize,
+    serde::Serialize,
+)]
+pub struct Account {}

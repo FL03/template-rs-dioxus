@@ -5,4 +5,6 @@
 #![allow(unused_macros)]
 
 #[macro_use]
+pub(crate) mod model;
+#[macro_use]
 pub(crate) mod wrapper;

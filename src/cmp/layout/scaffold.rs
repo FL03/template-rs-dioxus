@@ -8,14 +8,16 @@ use crate::{Route, APP_NAME};
 use dioxus::prelude::*;
 
 #[component]
-pub fn Scaffold() -> Element {
+pub fn Scaffold(title: String) -> Element {
     let links = vec![
         rsx! { Link { to: "/" {}, "Home" } },
         rsx! { Link { to: Route::Tasks {}, "Tasks" } },
     ];
-    let title = APP_NAME.to_string();
     rsx! {
         AppBar { links, title },
-        Outlet::<crate::Route> {}
+        main {
+            class: "flex flex-col min-h-full",
+            Outlet::<crate::Route> {}
+        }
     }
 }

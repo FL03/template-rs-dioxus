@@ -2,9 +2,9 @@
     Appellation: data <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+pub(crate) use self::types::*;
 #[doc(inline)]
 pub use self::{profile::*, task::*};
-pub(crate) use self::types::*;
 
 pub mod profile;
 pub mod task;
@@ -13,7 +13,6 @@ pub(crate) mod prelude {
     pub use super::profile::Profile;
     pub use super::task::Task;
 }
-
 
 #[allow(unused)]
 pub(crate) mod types {

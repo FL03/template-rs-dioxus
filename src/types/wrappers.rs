@@ -3,25 +3,7 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 
-wrapper!(Id(String), Timestamp(String), Title(String));
-
-impl Id {
-    pub fn v4() -> Self {
-        Self(uuid::Uuid::new_v4().to_string())
-    }
-}
-
-impl Default for Id {
-    fn default() -> Self {
-        Self::v4()
-    }
-}
-
-impl From<uuid::Uuid> for Id {
-    fn from(uuid: uuid::Uuid) -> Self {
-        Self(uuid.to_string())
-    }
-}
+wrapper!(Timestamp(String), Title(String));
 
 impl Timestamp {
     pub fn now() -> Self {

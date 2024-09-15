@@ -33,8 +33,6 @@ pub struct BadgeProp {
     pub text: String,
 }
 
-
-
 pub struct BaseProps {
     pub background: String,
     pub border: String,

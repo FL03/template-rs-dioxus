@@ -2,8 +2,8 @@
     Appellation: home <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-use crate::Route;
 use crate::cmp::badge::GrayBadge as Badge;
+use crate::Route;
 use dioxus::prelude::*;
 
 #[component]

@@ -9,7 +9,7 @@ env:
   ARTIFACTS: dist
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
   release:
     types: [ published ]

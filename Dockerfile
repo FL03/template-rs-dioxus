@@ -5,5 +5,12 @@ ADD . .
 
 RUN dx build --release
 
+FROM builder as debug
+
+RUN dx serve
+
+FROM alpine:latest
+
+COPY --from=builder /app/dist/ /app/
 
 

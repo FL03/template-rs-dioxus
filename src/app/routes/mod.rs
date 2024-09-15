@@ -3,9 +3,10 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 #[doc(inline)]
-pub use self::{errors::*, dashboard::Dashboard, tasks::*};
+pub use self::{dashboard::Dashboard, errors::*, settings::Settings, tasks::*};
 
 mod dashboard;
+mod settings;
 mod tasks;
 
 mod errors {
@@ -16,12 +17,12 @@ mod errors {
 }
 
 pub(crate) mod prelude {
-    pub use super::errors::*;
     pub use super::dashboard::Dashboard;
+    pub use super::errors::*;
+    pub use super::settings::Settings;
     pub use super::tasks::Tasks;
     pub use super::Route;
 }
-
 
 use crate::cmp::Navbar;
 use dioxus::prelude::*;
@@ -39,4 +40,3 @@ pub enum Route {
     #[route("/:..route")]
     PageNotFound { route: Vec<String> },
 }
-

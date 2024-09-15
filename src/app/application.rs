@@ -3,15 +3,15 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 use super::Settings;
-
-use crate::{Route, Timestamp};
+use crate::app::routes::Route;
+use crate::{Timestamp, SAMPLE_PROFILES, SAMPLE_TASKS};
 use dioxus::prelude::*;
 
 pub fn App() -> Element {
     use_context_provider(|| Signal::new(Settings::default()));
     use_context_provider(|| Signal::new(Timestamp::now()));
-    use_context_provider(|| Signal::new(crate::SAMPLE_PROFILES.clone()));
-    use_context_provider(|| Signal::new(crate::SAMPLE_TASKS.clone()));
+    use_context_provider(|| Signal::new(SAMPLE_PROFILES.clone()));
+    use_context_provider(|| Signal::new(SAMPLE_TASKS.clone()));
 
     rsx! {
         div {

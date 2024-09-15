@@ -38,7 +38,7 @@ pub fn AppBar(links: Vec<Element>, title: String) -> Element {
                         button {
                             class: "block mx-2 px-2 rounded-lg shadow text-dark bg-gradient-to-r from-cyan-700 to-blue-700",
                             onclick: |_| {
-                                log::tracing::info!("Profile button clicked");
+                                dxl::tracing::info!("Profile button clicked");
                             },
                             "Profile"
                         }
