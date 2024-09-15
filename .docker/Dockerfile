@@ -1,4 +1,4 @@
-FROM dioxus.dockerfile as builder-base
+FROM jo3mccain/dioxus as builder-base
 
 WORKDIR /app
 ADD ../client .

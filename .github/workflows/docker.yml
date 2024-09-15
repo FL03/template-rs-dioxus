@@ -16,7 +16,23 @@ env:
   REGISTRY: hub.docker.com
 
 jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/setup-buildx-action@v3
+    - name: Publish
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      with:
+        context: .
+        dockerfile: .docker/dioxus.dockerfile
+        name: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        platforms: linux/amd64
+        snapshot: true
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
   app:
+    needs: workspace
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
