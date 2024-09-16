@@ -23,12 +23,14 @@ permissions: write-all
 jobs:
   web:
     env:
-      APP_PLATFORM: web
-      APP_TARGET: wasm32-unknown-unknown
+      APP_PLATFORM: ${{ matrix.platform }}
+      APP_TARGET: ${{ matrix.target }}
     name: web
     strategy:
       matrix:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
+        platform: [ web ]
+        target: [ wasm32-unknown-unknown ]
         toolchain: [ stable, nightly ]
     runs-on: ${{ matrix.os }}
     steps:
@@ -43,14 +45,14 @@ jobs:
       - name: cache
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target/wasm32-unknown-unknown/release
+            target/wasm32-unknown-unknown/release
           restore-keys: |
-            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-${{ hashFiles('**/Cargo.lock') }}
-            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ env.APP_PLATFORM }}-
+            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ matrix.target }}-
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
             ${{ runner.os }}-cargo-
             ${{ runner.os }}-

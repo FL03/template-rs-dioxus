@@ -19,6 +19,9 @@ RUN dx build --release
 
 FROM builder AS debug
 
-EXPOSE 8080
+ENV PORT=8080 \
+    RUST_LOG=debug
 
-CMD ["dx", "serve", "--release", "--port 8080"]
+EXPOSE ${PORT}
+
+CMD dx serve --port 8080 --release
