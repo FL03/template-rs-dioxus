@@ -7,8 +7,6 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn Tasks() -> Element {
-    // let ctx = use_context::<Signal<Context>>();
-
     let date = use_context::<Signal<crate::Timestamp>>();
 
     let users = use_context::<Signal<Vec<Profile>>>();
@@ -20,12 +18,11 @@ pub fn Tasks() -> Element {
                 div { class: "mb-6 p-4 dark:text-dark",
                     h1 { class: "text-2xl font-bold", "Tasks" }
                     p { class: "text-sm text-gray-600", "{date.read()}" }
-                    p { class: "text-sm text-gray-600" }
                 }
             }
-            main {
+            main { class: "p-4 bg-white dark:bg-white rounded-lg shadow-sm",
                 div { class: "grid gap-6 md:grid-cols-2",
-                    div { class: "bg-zinc-700 shadow rounded-lg p-4",
+                    div { class: "bg-zinc-800 shadow rounded-lg p-4",
                         h2 { class: "text-xl font-semibold mb-4", "Employees on Shift" }
                         ul {
                             {{
@@ -37,7 +34,7 @@ pub fn Tasks() -> Element {
                             }}
                         }
                     }
-                    div { class: "bg-zinc-700 shadow rounded-lg p-4",
+                    div { class: "bg-zinc-800 shadow rounded-lg p-4",
                         h2 { class: "text-xl font-semibold mb-4", "Tasks" }
                         table { class: "w-full",
                             thead {
@@ -55,7 +52,7 @@ pub fn Tasks() -> Element {
                                                 td { "{task.name}" }
                                                 td {
                                                     select {
-                                                        class: "text-dark",
+                                                        class: "flex flex-nowrap bg-zinc-700 border border-zinc-900 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 mx-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                                         onchange: move |_evt| {},
                                                         option { value: "", "Unassigned" }
                                                         {{
