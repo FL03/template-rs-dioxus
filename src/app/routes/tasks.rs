@@ -20,7 +20,7 @@ pub fn Tasks() -> Element {
                     p { class: "text-sm text-gray-600", "{date.read()}" }
                 }
             }
-            main { class: "p-4 bg-white dark:bg-white rounded-lg shadow-sm",
+            main { class: "flex flex-col p-4 bg-white dark:bg-white rounded-lg shadow-sm",
                 div { class: "grid gap-6 md:grid-cols-2",
                     div { class: "bg-zinc-800 shadow rounded-lg p-4",
                         h2 { class: "text-xl font-semibold mb-4", "Employees on Shift" }
@@ -34,9 +34,9 @@ pub fn Tasks() -> Element {
                             }}
                         }
                     }
-                    div { class: "bg-zinc-800 shadow rounded-lg p-4",
+                    div { class: "flex flex-col bg-zinc-800 shadow rounded-lg p-4",
                         h2 { class: "text-xl font-semibold mb-4", "Tasks" }
-                        table { class: "w-full",
+                        table { class: "flex flex-col",
                             thead {
                                 tr {
                                     th { class: "text-left", "Task" }
@@ -44,7 +44,7 @@ pub fn Tasks() -> Element {
                                     th { class: "text-left", "Status" }
                                 }
                             }
-                            tbody {
+                            tbody { class: "block w-full",
                                 {{
                                     tasks.read().iter().map(|task| {
                                         rsx! {
@@ -52,14 +52,13 @@ pub fn Tasks() -> Element {
                                                 td { "{task.name}" }
                                                 td {
                                                     select {
-                                                        class: "flex flex-nowrap bg-zinc-700 border border-zinc-900 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 mx-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                                                        class: "flex flex-nowrap p-2.5 bg-zinc-700 border border-zinc-400 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                                         onchange: move |_evt| {},
                                                         option { value: "", "Unassigned" }
                                                         {{
                                                             users.read().iter().map(|employee| {
                                                                 rsx! {
                                                                     option {
-                                                                        class: "text-dark",
                                                                         value: "{employee.id()}",
                                                                         selected: "{task.assignees().contains(&employee.id)}",
                                                                         "{employee.name()}"
