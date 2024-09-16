@@ -24,4 +24,4 @@ ENV PORT=8080 \
 
 EXPOSE ${PORT}
 
-CMD dx serve --port 8080 --release
+CMD serve --port 8080 --release
