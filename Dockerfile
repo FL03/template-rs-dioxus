@@ -1,13 +1,20 @@
-FROM jo3mccain/dioxus:latest AS builder-base
+FROM node:latest AS node
+
+WORKDIR /app
+
+COPY input.css .
+
+RUN npm install -g tailwindcss
+
+RUN npx tailwindcss -i ./input.css -o ./tailwind.css --minify
+
+FROM jo3mccain/dioxus:latest AS builder
 
 WORKDIR /app
 ADD . .
 
-RUN npm install -g tailwindcss
+COPY --from=node /app/tailwind.css /app/assets/tailwind.css
 
-FROM builder-base AS builder
-
-RUN npx tailwindcss -i ./input.css -o ./assets/tailwind.css --minify
 RUN dx build --release
 
 FROM builder AS debug
