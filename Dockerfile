@@ -25,3 +25,10 @@ ENV PORT=8080 \
 EXPOSE ${PORT}
 
 CMD serve --port 8080 --release
+
+FROM nginx
+
+ENV PORT=8080 \
+    RUST_LOG=debug
+
+COPY --from=builder /app/dist /usr/share/nginx/html
