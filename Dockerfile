@@ -21,4 +21,4 @@ FROM builder AS debug
 
 EXPOSE 8080
 
-RUN dx serve --release --port 8080
+CMD ["dx", "serve", "--release", "--port 8080"]
