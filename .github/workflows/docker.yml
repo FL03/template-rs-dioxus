@@ -25,7 +25,7 @@ jobs:
   dioxus:
     env:
       BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
-    if: ${{ github.event.schedule }} || ${{ github.event.inputs.dioxus == 'true' }} && ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name }} == 'schedule' || ${{ github.event.inputs.dioxus == 'true' }} && ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
     - 
