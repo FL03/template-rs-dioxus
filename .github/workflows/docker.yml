@@ -25,7 +25,7 @@ jobs:
   dioxus:
     env:
       BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
-    if: ${{ github.event_name == 'schedule' }} || ${{ github.event_name == 'workflow_dispatch' }} || ${{ github.event.inputs.dioxus == 'true' }}
+    if: ${{ github.event_name == 'schedule' }} || ${{ github.event_name == 'workflow_dispatch' }} && ${{ github.event.inputs.dioxus == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - 
@@ -47,8 +47,11 @@ jobs:
       name: dioxus-cli
       uses: docker/build-push-action@v6
       with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
         context: .
         file: ./.docker/dx.dockerfile
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         platforms: linux/amd64
         push: true
         tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
@@ -76,8 +79,11 @@ jobs:
       name: application
       uses: docker/build-push-action@v6
       with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
         context: .
         file: ./Dockerfile
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         platforms: linux/amd64
         push: true
         tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
