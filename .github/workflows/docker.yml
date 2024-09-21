@@ -50,7 +50,7 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         context: .
-        file: ./.docker/dx.dockerfile
+        file: ./.docker/rsdx.dockerfile
         github-token: ${{ secrets.GITHUB_TOKEN }}
         platforms: linux/amd64
         push: true
