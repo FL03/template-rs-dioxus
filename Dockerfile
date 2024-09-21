@@ -26,11 +26,10 @@ EXPOSE ${PORT}
 
 CMD serve --port 8080 --release
 
-FROM nginx
+FROM nginx AS runner
 
-ENV PORT=8080 \
-    RUST_LOG=debug
+ENV RUST_LOG=debug
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY --from=builder /app/nginx.conf /usr/local/nginx/conf/nginx.conf
-COPY --from=builder /app/mime.types /usr/local/nginx/conf/mime.types
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/mime.types /usr/local/nginx/conf/mime.types
