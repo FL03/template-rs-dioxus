@@ -23,11 +23,14 @@ permissions: write-all
 jobs:
   pages:
     env:
-      RUST_TOOLCHAIN: stable
+      RUST_TOOLCHAIN: ${{ matrix.toolchain }}
       OUTDIR: dist
       WORKDIR: .
     name: GitHub Pages
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: [ stable ]
     steps:
       - uses: actions/checkout@v4
       - name: rustup
@@ -50,13 +53,13 @@ jobs:
       - name: cache
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-cargo-${{ env.RUST_TOOLCHAIN }}-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target/wasm32-unknown-unknown/release
           restore-keys: |
-            ${{ runner.os }}-cargo-${{ env.RUST_TOOLCHAIN }}-
+            ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
             ${{ runner.os }}-cargo-
             ${{ runner.os }}-
       - name: publish
