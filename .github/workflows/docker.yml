@@ -9,6 +9,8 @@ on:
     types: [ created ]
   repository_dispatch:
     types: [ docker ]
+  schedule:
+    - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
     inputs:
       dioxus:
@@ -20,34 +22,72 @@ env:
   REGISTRY: hub.docker.com
 
 jobs:
-  workspace:
-    runs-on: ubuntu-latest
-    if: github.event.inputs.dioxus == 'true'
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - name: Publish
-      uses: elgohr/Publish-Docker-Github-Action@v5
-      with:
-        context: .
-        dockerfile: .docker/dioxus.dockerfile
-        name: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        platforms: linux/amd64
-        snapshot: true
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-  app:
+  dioxus:
+    if: ${{ github.event.schedule }} || ${{ github.event.inputs.dioxus == 'true' }}
+    env:
+      BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dx
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - name: Publish
-      uses: elgohr/Publish-Docker-Github-Action@v5
+    - 
+      name: Checkout
+      uses: actions/checkout@v4
+    -
+      name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
+    -
+      name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    -
+      name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: dioxus-cli
+      uses: docker/build-push-action@v6
       with:
         context: .
-        dockerfile: Dockerfile
-        name: ${{ secrets.DOCKERHUB_USERNAME }}/template-rs-dioxus
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        file: ./.docker/dx.dockerfile
         platforms: linux/amd64
-        snapshot: true
+        push: true
+        tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
+  application:
+    env:
+      BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      name: Checkout
+      uses: actions/checkout@v4
+    -
+      name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
+    -
+      name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    -
+      name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: dioxus-cli
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./.docker/dx.dockerfile
+        platforms: linux/amd64
+        push: true
+        tags: :latest,${{ env.BASETAG }}:${{ github.sha }}
+    -
+      name: application
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./Dockerfile
+        platforms: linux/amd64
+        push: true
+        tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
