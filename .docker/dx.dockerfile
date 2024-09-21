@@ -19,4 +19,4 @@ FROM exec-base AS exec
 
 COPY --from=builder /usr/local/cargo/bin/dx /usr/local/bin/dx
 
-CMD ["dx"]
+ENTRYPOINT ["dx"]
