@@ -31,4 +31,4 @@ FROM nginx AS runner
 ENV RUST_LOG=debug
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
