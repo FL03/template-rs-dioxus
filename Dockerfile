@@ -30,12 +30,9 @@ RUN groupadd -g ${GID} ${GROUP} && \
 # Switch to the custom user
 USER ${USERNAME}
 
-FROM runner-base AS runner
-
 ENV RUST_LOG=debug
 
 COPY --chown=${USERNAME}:${GROUP} \
-     --chmod=755 \
      --from=builder /app/dist /usr/share/nginx/html
 
 COPY --from=builder /app/nginx/nginx.conf /etc/nginx/nginx.conf
