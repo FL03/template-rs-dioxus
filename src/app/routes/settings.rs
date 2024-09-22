@@ -7,5 +7,5 @@ use dx::prelude::*;
 
 #[component]
 pub fn Settings() -> Element {
-    rsx! {  }
+    rsx! {}
 }

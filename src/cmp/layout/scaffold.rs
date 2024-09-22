@@ -19,10 +19,9 @@ pub fn Scaffold(title: String) -> Element {
     }
 }
 
-
 pub enum Links {
     Route(Route),
-    String(String)
+    String(String),
 }
 
 pub struct Hyperlink {

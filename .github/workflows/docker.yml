@@ -22,39 +22,6 @@ env:
   REGISTRY: hub.docker.com
 
 jobs:
-  dioxus:
-    env:
-      BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
-    if: ${{ github.event_name == 'schedule' }} || ${{ github.event_name == 'workflow_dispatch' }} && ${{ github.event.inputs.dioxus == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-    - 
-      name: Checkout
-      uses: actions/checkout@v4
-    -
-      name: Setup QEMU
-      uses: docker/setup-qemu-action@v3
-    -
-      name: Setup Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    -
-      name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    -
-      name: dioxus-cli
-      uses: docker/build-push-action@v6
-      with:
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        context: .
-        file: ./.docker/rsdx.dockerfile
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        platforms: linux/amd64
-        push: true
-        tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
   application:
     env:
       BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
@@ -87,3 +54,47 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
+  dioxus:
+    env:
+      BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      name: Checkout
+      uses: actions/checkout@v4
+    -
+      name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
+    -
+      name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    -
+      name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: dioxus (latest)
+      uses: docker/build-push-action@v6
+      with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        context: .
+        file: ./.docker/dioxus/Dockerfile
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        platforms: linux/amd64
+        push: true
+        tags: ${{ env.BASETAG }}:latest,${{ env.BASETAG }}:${{ github.sha }}
+    -
+      name: dioxus (slim)
+      uses: docker/build-push-action@v6
+      with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        context: .
+        file: ./.docker/dioxus/dx.dockerfile
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        platforms: linux/amd64
+        push: true
+        tags: ${{ env.BASETAG }}:slim,${{ env.BASETAG }}:slim-${{ github.sha }}

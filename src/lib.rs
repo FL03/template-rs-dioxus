@@ -34,9 +34,9 @@ extern crate dioxus as dx;
 extern crate dioxus_logger as dxl;
 
 // Urls are relative to your Cargo.toml file
-const _TAILWIND_URL: &str = manganis::mg!(file("https://cdn.tailwindcss.com"));
+// const _TAILWIND_URL: &str = manganis::mg!(file("https://cdn.tailwindcss.com"));
 
-const _TAILWIND: &str = manganis::mg!(file("assets/tailwind.css"));
+const _TAILWIND: &str = manganis::mg!(file("public/tailwind.css"));
 
 pub const APP_NAME: &str = "RMS";
 

@@ -24,7 +24,6 @@ jobs:
   pages:
     env:
       RUST_TOOLCHAIN: ${{ matrix.toolchain }}
-      OUTDIR: dist
       WORKDIR: .
     name: GitHub Pages
     runs-on: ubuntu-latest

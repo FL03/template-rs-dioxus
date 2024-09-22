@@ -1,5 +1,5 @@
 [application]
-asset_dir = "assets"
+asset_dir = "public"
 default_platform = "web"
 name = "template-rs-dioxus"
 out_dir = "docs"

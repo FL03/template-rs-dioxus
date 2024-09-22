@@ -1,12 +1,11 @@
 FROM rust:latest AS builder-base
 
-RUN rustup default stable && \
-    rustup target add wasm32-unknown-unknown && \
+RUN rustup target add wasm32-unknown-unknown && \
     rustup update
 
 FROM builder-base AS builder
 
-RUN cargo install dioxus-cli
+RUN cargo install --locked dioxus-cli
 
 FROM debian:stable-slim AS exec-base
 

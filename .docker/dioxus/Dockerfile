@@ -8,6 +8,6 @@ FROM builder-base AS builder
 
 RUN cargo install --locked dioxus-cli
 
-FROM builder
+FROM builder AS rsdx
 
 ENTRYPOINT ["dx"]

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-npx tailwindcss -i ./input.css -o ./assets/tailwind.css --minify
+npx tailwindcss -i ./input.css -o ./public/tailwind.css --minify
 rm Dioxus.toml
 cp .config/Dioxus.pages.toml Dioxus.toml
 dx build --release
