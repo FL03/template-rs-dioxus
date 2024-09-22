@@ -23,3 +23,4 @@ ENV RUST_LOG=debug
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/nginx/mime.types /etc/nginx/conf/mime.types
