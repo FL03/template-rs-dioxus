@@ -17,7 +17,20 @@ COPY --from=node /app/tailwind.css /app/public/tailwind.css
 
 RUN dx build --release
 
-FROM nginx AS runner
+FROM nginx AS runner-base
+
+ARG GID=1000 \
+    UID=1000 \
+    GROUP=customgroup \
+    USERNAME=customuser
+
+RUN groupadd -g ${GID} ${GROUP} && \
+    useradd -g ${GROUP} -m -u ${UID} ${USERNAME}
+
+# Switch to the custom user
+USER ${USERNAME}
+
+FROM runner-base AS runner
 
 ENV RUST_LOG=debug
 
