@@ -19,17 +19,6 @@ RUN dx build --release
 
 FROM nginx AS runner-base
 
-ARG GID=1000 \
-    UID=1000 \
-    GROUP=runners \
-    USERNAME=runner
-
-RUN groupadd -g ${GID} ${GROUP} && \
-    useradd -g ${GROUP} -m -u ${UID} ${USERNAME}
-
-# Switch to the custom user
-USER ${USERNAME}
-
 ENV RUST_LOG=debug
 
 COPY --chmod=755 --from=builder /app/dist /usr/share/nginx/html
