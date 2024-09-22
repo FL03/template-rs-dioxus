@@ -10,7 +10,7 @@ RUN cargo install --locked dioxus-cli
 
 ENTRYPOINT ["dx"]
 
-FROM debian:slim-latest AS slim-base
+FROM debian:stable-slim AS slim-base
 
 RUN apt-get update -y && \
     apt-get upgrade -y 

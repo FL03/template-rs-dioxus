@@ -8,7 +8,7 @@ RUN npm install -g tailwindcss
 
 RUN npx tailwindcss -i ./input.css -o ./tailwind.css --minify
 
-FROM jo3mccain/dioxus:slim AS builder
+FROM jo3mccain/dioxus:latest AS builder
 
 WORKDIR /app
 ADD . .
