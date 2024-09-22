@@ -22,26 +22,23 @@ permissions: write-all
 
 jobs:
   web:
-    env:
-      APP_PLATFORM: ${{ matrix.platform }}
-      APP_TARGET: ${{ matrix.target }}
     name: web
     strategy:
       matrix:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
         platform: [ web ]
         target: [ wasm32-unknown-unknown ]
-        toolchain: [ stable, nightly ]
+        toolchain: [ stable ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: rustup
         run: |
           rustup default ${{ matrix.toolchain }}
-          rustup target add ${{ env.APP_TARGET }}
+          rustup target add ${{ matrix.target }}
           rustup update
       - name: build
-        run: cargo build --all-features -r -v --workspace --target ${{ env.APP_TARGET }}
+        run: cargo build --all-features -r -v --workspace --target ${{ matrix.target }}
       - name: cache
         uses: actions/cache@v4
         with:
