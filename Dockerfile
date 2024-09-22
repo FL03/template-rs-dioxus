@@ -21,8 +21,8 @@ FROM nginx AS runner-base
 
 ARG GID=1000 \
     UID=1000 \
-    GROUP=customgroup \
-    USERNAME=customuser
+    GROUP=runners \
+    USERNAME=runner
 
 RUN groupadd -g ${GID} ${GROUP} && \
     useradd -g ${GROUP} -m -u ${UID} ${USERNAME}
@@ -34,6 +34,6 @@ FROM runner-base AS runner
 
 ENV RUST_LOG=debug
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --chown=runner:runners --chmod=755 --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/nginx/mime.types /etc/nginx/conf/mime.types
