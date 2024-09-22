@@ -61,6 +61,7 @@ jobs:
   dioxus:
     env:
       BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
+    if: ${{ github.event.inputs.dioxus == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - 
