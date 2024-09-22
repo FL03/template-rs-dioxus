@@ -23,7 +23,6 @@ permissions: write-all
 jobs:
   pages:
     env:
-      RUST_TOOLCHAIN: ${{ matrix.toolchain }}
       WORKDIR: .
     name: GitHub Pages
     runs-on: ubuntu-latest
@@ -31,25 +30,31 @@ jobs:
       matrix:
         toolchain: [ stable ]
     steps:
-      - uses: actions/checkout@v4
-      - name: rustup
+      - 
+        name: checkout
+        uses: actions/checkout@v4
+      - 
+        name: rustup
         run: |
           rustup target add wasm32-unknown-unknown
           rustup update
-      - uses: Swatinem/rust-cache@v2
-      - name: install dioxus-cli
+      - 
+        name: install dioxus-cli
         run: cargo install dioxus-cli
-      - name: tailwindcss
+      - 
+        name: tailwindcss
         run: |
           npm install -g tailwindcss
-          npx tailwindcss -i ./input.css -o ./assets/tailwind.css --minify
-      - name: build
+          npx tailwindcss -i ./input.css -o ./public/tailwind.css --minify
+      - 
+        name: build
         run: |
           rm Dioxus.toml
           mv .config/Dioxus.pages.toml Dioxus.toml
           dx build --release
           mv ./docs/index.html ./docs/404.html
-      - name: cache
+      -
+        name: cache
         uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ hashFiles('**/Cargo.lock') }}
@@ -61,7 +66,8 @@ jobs:
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
             ${{ runner.os }}-cargo-
             ${{ runner.os }}-
-      - name: publish
+      - 
+        name: publish
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
