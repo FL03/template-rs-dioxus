@@ -8,6 +8,23 @@ FROM builder-base AS builder
 
 RUN cargo install --locked dioxus-cli
 
-FROM builder AS rsdx
+ENTRYPOINT ["dx"]
+
+FROM debian:slim-latest AS slim-base
+
+RUN apt-get update -y && \
+    apt-get upgrade -y 
+
+RUN apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    libssl-dev \
+    pkg-config
+
+RUN rm -rf /var/lib/apt/lists/*
+
+FROM slim-base AS slim
+
+COPY --from=builder /usr/local/cargo/bin/dx /usr/local/bin/dx
 
 ENTRYPOINT ["dx"]

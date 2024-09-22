@@ -1,35 +1,27 @@
-name: docker
+name: containers
 
 concurrency:   
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  REGISTRY: hub.docker.com
+
 on:
-  pull_request:
-    branches: [ main ]
-  push:
-    branches: [ main ]
-  release:
-    types: [ created ]
   repository_dispatch:
     types: [ docker ]
   schedule:
     - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
-    inputs:
-      dioxus:
-        description: 'Dioxus CLI'
-        required: true
-        default: 'false'
-
-env:
-  REGISTRY: hub.docker.com
 
 jobs:
-  application:
+  dioxus:
     env:
-      HANDLE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+      BASETAG: ${{ secrets.DOCKERHUB_USERNAME }}/dioxus
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [ builder, slim ]
     steps:
     - 
       name: Checkout
@@ -47,15 +39,18 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     -
-      name: application
+      id: docker-bnp
+      name: dioxus (${{ matrix.target }})
       uses: docker/build-push-action@v6
       with:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         context: .
-        file: ./Dockerfile
+        file: ./.docker/dioxus/Dockerfile
         github-token: ${{ secrets.GITHUB_TOKEN }}
         platforms: linux/amd64
         push: true
-        tags: ${{ env.HANDLE }}:latest,${{ env.HANDLE }}:${{ github.sha }}
-  
+        tags: |
+          ${{ env.BASETAG }}:${{ matrix.target}}-latest,
+          ${{ env.BASETAG }}:${{ matrix.target}}-${{ github.sha }}
+        target: ${{ matrix.target}}
