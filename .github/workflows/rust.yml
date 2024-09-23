@@ -8,10 +8,6 @@ env:
   CARGO_TERM_COLOR: always
 
 on:
-  pull_request:
-    branches: [ main ]
-  release:
-    types: [ created ]
   repository_dispatch:
     types: [ rust ]
   schedule:
@@ -25,11 +21,10 @@ jobs:
     name: web
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
         platform: [ web ]
         target: [ wasm32-unknown-unknown ]
         toolchain: [ stable ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: rustup
