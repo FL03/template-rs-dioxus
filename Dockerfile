@@ -17,11 +17,10 @@ COPY --from=node /app/tailwind.css /app/public/tailwind.css
 
 RUN dx build --release
 
-FROM nginx AS runner-base
+FROM nginx:alpine-slim AS runner-base
 
 ENV RUST_LOG=debug
 
-COPY --from=builder --chmod=755 /app/dist /usr/share/nginx/html
-COPY --from=node --chmod=755 /app/tailwind.css /usr/share/nginx/html/tailwind.css
+COPY --link --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /app/nginx/mime.types /etc/nginx/conf/mime.types
+COPY --from=builder /app/nginx/mime.types /etc/nginx/mime.types
