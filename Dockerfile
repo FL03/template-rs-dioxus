@@ -21,6 +21,7 @@ FROM nginx AS runner-base
 
 ENV RUST_LOG=debug
 
-COPY --chmod=755 --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder --chmod=755 /app/dist /usr/share/nginx/html
+COPY --from=node --chmod=755 /app/tailwind.css /usr/share/nginx/html/tailwind.css
 COPY --from=builder /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/nginx/mime.types /etc/nginx/conf/mime.types
