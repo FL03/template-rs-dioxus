@@ -6,9 +6,9 @@ concurrency:
 
 on:
   pull_request:
-    branches: [ main ]
-  release:
-    types: [ created ]
+    branches: [ main, v*.*.* ]
+  push:
+    tags: [ v*.*.* ]
   repository_dispatch:
     types: [ docker ]
   schedule:
@@ -20,10 +20,6 @@ env:
 
 jobs:
   application:
-    env:
-      HANDLE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
-      SNAPSHOT: ${{ github.sha }}
-      PREFIX: ${{ secrets.DOCKERHUB_USERNAME }}
     runs-on: ubuntu-latest
     steps:
     - 
@@ -34,9 +30,8 @@ jobs:
       name: docker metadata
       uses: docker/metadata-action@v5
       with:
-        # list of Docker images to use as base name for tags
-        images: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+        flavor: latest=true
+        images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
         tags: |
           type=schedule
           type=ref,event=branch
