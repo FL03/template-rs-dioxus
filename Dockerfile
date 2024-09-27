@@ -30,14 +30,14 @@ ENV NGINX_HOST=staging.scattered-systems.com \
 EXPOSE 80
 
 # Copy configuration files
-COPY .config/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY .config/nginx/mime.types /etc/nginx/mime.types
+COPY --from=workspace --link /src/.config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=workspace --link /src/.config/nginx/mime.types /etc/nginx/mime.types
 
 # Copy source files
-COPY --from=builder --link /workspace/dist /usr/share/nginx/html
-COPY --from=builder --link /workspace/dist/assets/dioxus /usr/share/nginx/html/assets/dioxus
-COPY --from=node --link /workspace/tailwind.css /usr/share/nginx/html/tailwind.css
+COPY --from=builder /workspace/dist /usr/share/nginx/html
+COPY --from=builder /workspace/dist/assets/dioxus /usr/share/nginx/html/assets/dioxus
+COPY --from=node /workspace/tailwind.css /usr/share/nginx/html/tailwind.css
 
-FROM runner-base AS runner
+FROM runner-base AS debug
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx-debug", "-g", "daemon off;"]

@@ -4,6 +4,9 @@ concurrency:
   cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  REGISTRY: ghcr.io # hub.docker.com
+
 on:
   pull_request:
     branches: [ main, v*.*.* ]
@@ -15,11 +18,12 @@ on:
     - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
 
-env:
-  REGISTRY: hub.docker.com
+permissions: write-all
 
 jobs:
   application:
+    env:
+      IMAGE: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
     - 
@@ -31,7 +35,7 @@ jobs:
       uses: docker/metadata-action@v5
       with:
         flavor: latest=true
-        images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+        images: ${{ env.REGISTRY }}/${{ github.event.repository.name }}
         tags: |
           type=schedule
           type=ref,event=branch
@@ -50,9 +54,11 @@ jobs:
       name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        registry: ${{ env.REGISTRY }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        username: ${{ github.actor }}
     -
+      id: push
       name: build and push
       uses: docker/build-push-action@v6
       with:
@@ -65,4 +71,11 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: ${{ steps.meta.outputs.tags }}
-  
+    - 
+      name: Generate artifact attestation
+      uses: actions/attest-build-provenance@v1
+      with:
+        push-to-registry: true
+        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE}}
+        subject-digest: ${{ steps.push.outputs.digest }}
+        
