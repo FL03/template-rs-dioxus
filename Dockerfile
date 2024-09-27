@@ -22,13 +22,22 @@ COPY --chown=755 --from=node --link /workspace/tailwind.css /workspace/public/ta
 
 RUN dx build --release
 
-FROM nginx AS runner-base
+FROM nginx:latest AS runner-base
 
-ENV RUST_LOG=debug
+ENV NGINX_HOST=staging.scattered-systems.com \
+    RUST_LOG=debug
+
+EXPOSE 80
+
+# Copy configuration files
+COPY .config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY .config/nginx/mime.types /etc/nginx/mime.types
 
 # Copy source files
-COPY --chown=755 --from=builder /workspace/dist /usr/share/nginx/html
-COPY --chown=755 --from=node /workspace/tailwind.css /usr/share/nginx/html/tailwind.css
-# Copy configuration files
-COPY --from=workspace --chown=755 /src/.config/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=workspace --chown=755 /src/.config/nginx/mime.types /etc/nginx/mime.types
+COPY --from=builder --link /workspace/dist /usr/share/nginx/html
+COPY --from=builder --link /workspace/dist/assets/dioxus /usr/share/nginx/html/assets/dioxus
+COPY --from=node --link /workspace/tailwind.css /usr/share/nginx/html/tailwind.css
+
+FROM runner-base AS runner
+
+CMD ["nginx", "-g", "daemon off;"]

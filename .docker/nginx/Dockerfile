@@ -1,8 +1,10 @@
 FROM scratch AS workspace
 
+ENV WORKDIR=../../
+
 WORKDIR /src
 # Copy the workspace
-ADD . .
+ADD ${WORKDIR} .
 
 FROM nginx:latest AS debug
 

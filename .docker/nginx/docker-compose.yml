@@ -1,8 +1,6 @@
 services:
   nginx:
-    build:
-      context: ../../
-      dockerfile: Dockerfile
+    build: Dockerfile
     container_name: debug
     ports:
       - "80:80"
