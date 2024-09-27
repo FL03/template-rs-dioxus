@@ -1,13 +1,11 @@
 name: docker
 
 concurrency:   
-  cancel-in-progress: true
+  cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
 on:
   pull_request:
-    branches: [ main ]
-  push:
     branches: [ main ]
   release:
     types: [ created ]
@@ -16,11 +14,6 @@ on:
   schedule:
     - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
-    inputs:
-      dioxus:
-        description: 'Dioxus CLI'
-        required: true
-        default: 'false'
 
 env:
   REGISTRY: hub.docker.com
