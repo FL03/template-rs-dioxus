@@ -1,12 +1,4 @@
-# Artifacts
 
-**/.artifacts/data/
-**/.docker/data/
-
-
-## Caches
-
-**/.cache/
 
 
 
@@ -102,7 +94,22 @@
 
 # Miscellaneous
 
+## Artifacts
+**/.artifacts/data/
+**/.artifacts/logs/
+**/.artifacts/tmp/
+
+**/.docker/data/
+**/.docker/logs/
+**/.docker/tmp/
+
+### Caches
+
+**/.cache/
+
 ## Files
+**/*.br
+**/*.br.*
 
 **/*.lock
 **/*.lock.*

@@ -89,7 +89,7 @@ impl AppState {
     }
 
     pub fn as_signal(&self) -> dioxus::prelude::Signal<AppState> {
-        dioxus::prelude::Signal::from(self.clone())
+        dioxus::prelude::Signal::new(self.clone())
     }
 }
 
