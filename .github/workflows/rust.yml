@@ -26,25 +26,28 @@ jobs:
         toolchain: [ stable ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: rustup
+      - 
+        name: checkout
+        uses: actions/checkout@v4
+      - 
         run: |
           rustup default ${{ matrix.toolchain }}
           rustup target add ${{ matrix.target }}
           rustup update
-      - name: build
-        run: cargo build --all-features -r -v --workspace --target ${{ matrix.target }}
-      - name: cache
+      - 
+        name: cache
         uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            target/wasm32-unknown-unknown/release
-            target/wasm32-unknown-unknown/release
+            target/
           restore-keys: |
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-${{ matrix.target }}-
             ${{ runner.os }}-cargo-${{ matrix.toolchain }}-
             ${{ runner.os }}-cargo-
             ${{ runner.os }}-
+      - 
+        name: build (workspace)
+        run: cargo build --all-features -r -v --workspace --target ${{ matrix.target }}
