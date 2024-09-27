@@ -1,12 +1,10 @@
 FROM scratch AS workspace
 
-ENV WORKDIR=../../
-
 WORKDIR /src
 # Copy the workspace
-ADD ${WORKDIR} .
+ADD . .
 
-FROM nginx:latest AS debug
+FROM nginx:latest AS runner-base
 
 # Copy the nginx configuration
 COPY --from=workspace --link /src/.config/nginx/nginx.conf /etc/nginx/nginx.conf
@@ -17,5 +15,7 @@ COPY --chown=755 ./dist /usr/share/nginx/html
 # Expose the port
 EXPOSE 80
 
+FROM runner-base AS debug
+
 # Start the server
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx-debug", "-g", "daemon off;"]
