@@ -18,12 +18,7 @@ on:
     - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
 
-permissions:
-  attestations: write
-  contents: read
-  deployments: write
-  packages: write
-  statuses: write
+permissions: write-all
 
 jobs:
   application:
@@ -77,10 +72,10 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
     - 
-      name: Generate artifact attestation
+      continue-on-error: true
+      name: attestation
       uses: actions/attest-build-provenance@v1
       with:
         push-to-registry: true
         subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE}}
         subject-digest: ${{ steps.push.outputs.digest }}
-        
