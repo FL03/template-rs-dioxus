@@ -2,6 +2,7 @@
     Appellation: settings <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+
 use crate::types::ThemeMode;
 
 #[derive(

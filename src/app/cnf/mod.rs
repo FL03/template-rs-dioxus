@@ -1,9 +1,9 @@
 /*
-    Appellation: cnf <module>
+    Appellation: config <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 #[doc(inline)]
-pub use self::{settings::*, theme::*};
+pub use self::{settings::*, theme::ThemeSettings};
 
-mod settings;
-mod theme;
+pub(crate) mod settings;
+pub(crate) mod theme;
