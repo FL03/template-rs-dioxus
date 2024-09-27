@@ -12,6 +12,7 @@
 #[doc(inline)]
 pub use self::{
     app::{App, Context, Route, Settings},
+    theme::Theme,
     traits::prelude::*,
     types::prelude::*,
     utils::*,
@@ -23,6 +24,7 @@ pub(crate) mod macros;
 pub mod app;
 pub mod cmp;
 pub mod data;
+pub mod theme;
 pub mod traits;
 pub mod types;
 pub mod utils;

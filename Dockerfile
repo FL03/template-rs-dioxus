@@ -1,12 +1,13 @@
 FROM scratch AS workspace
 
-COPY . .
+WORKDIR /src
+ADD . .
 
 FROM node:latest AS node
 
-WORKDIR /.docker
+WORKDIR /app
 
-COPY input.css .
+COPY --from=workspace --chown=755 --link src/input.css .
 
 RUN npm install -g tailwindcss
 
@@ -14,10 +15,10 @@ RUN npx tailwindcss -i ./input.css -o ./tailwind.css --minify
 
 FROM jo3mccain/dioxus:latest AS builder
 
-WORKDIR /.docker
+WORKDIR /app
 ADD . .
 
-COPY --chown=755 --from=node --link /.docker/tailwind.css /.docker/public/tailwind.css
+COPY --chown=755 --from=node --link /.docker/tailwind.css /app/public/tailwind.css
 
 RUN dx build --release
 
@@ -29,5 +30,5 @@ ENV RUST_LOG=debug
 COPY --chown=755 --from=builder /.docker/dist /usr/share/nginx/html
 COPY --chown=755 --from=node /.docker/tailwind.css /usr/share/nginx/html/tailwind.css
 # Copy configuration files
-COPY --chown=755 --link ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --chown=755 --link ./nginx/mime.types /etc/nginx/mime.types
+COPY --from=workspace --chown=755 --link ./.config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=workspace --chown=755 --link ./.config/nginx/mime.types /etc/nginx/mime.types

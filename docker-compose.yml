@@ -1,11 +1,21 @@
-version: "3"
 services:
-  nginx:
-    command: [nginx-debug, '-g', 'daemon off;']
-    image: nginx:alpine-slim
+  redis:
+    image: redis:alpine
+    container_name: redis
     ports:
-      - "80:80"
+      - "6379:6379"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app
+    container_name: app
+    ports:
+      - "8080:8080"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/mime.types:/etc/nginx/mime.types:ro
-      - ./dist:/usr/share/nginx/html:ro
+      - .:/app
+    command: npm run start
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - HOST=

@@ -3,16 +3,15 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 #[doc(inline)]
-pub use self::{cnf::*, ctx::Context, routes::*, state::AppState};
+pub use self::{config::Settings, ctx::Context, routes::*, state::AppState};
 
-pub mod cnf;
+pub mod config;
 pub mod ctx;
 pub mod routes;
 pub mod state;
-pub mod theme;
 
 pub(crate) mod prelude {
-    pub use super::cnf::*;
+    pub use super::config::prelude::*;
     pub use super::ctx::Context;
     pub use super::routes::prelude::*;
     pub use super::state::*;

@@ -3,7 +3,7 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 use crate::data::{Profile, Task};
-use crate::{Id, Settings, Theme, Timestamp};
+use crate::{Id, Settings, Timestamp};
 
 #[derive(
     Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Deserialize, serde::Serialize,
@@ -86,6 +86,16 @@ impl AppState {
 
     pub fn set_store(&mut self, store: AppStore) {
         self.store = store;
+    }
+
+    pub fn as_signal(&self) -> dioxus::prelude::Signal<AppState> {
+        dioxus::prelude::Signal::from(self.clone())
+    }
+}
+
+impl core::fmt::Display for AppState {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.write_str(serde_json::to_string(self).unwrap().as_str())
     }
 }
 
