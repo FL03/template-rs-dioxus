@@ -1,18 +1,18 @@
 [application]
 asset_dir = "public"
 default_platform = "web"
-name = "template-rs-dioxus"
+name = "staging-scattered-systems-com"
 out_dir = "dist"
 
 [web.app]
-title = "template-rs-dioxus"
+title = "Staging"
 
 [web.watcher]
+reload-html = true
 watch_path = ["public", "src"]
 
 [web.resource]
 script = []
-
 style = ["/tailwind.css"]
 
 [web.resource.dev]

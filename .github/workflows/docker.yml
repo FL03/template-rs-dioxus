@@ -1,41 +1,51 @@
 name: docker
 
 concurrency:   
-  cancel-in-progress: true
+  cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  REGISTRY: ghcr.io # hub.docker.com
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, v*.*.* ]
   push:
-    branches: [ main ]
-  release:
-    types: [ created ]
+    tags: [ v*.*.* ]
   repository_dispatch:
     types: [ docker ]
   schedule:
     - cron: "30 21 * * 0" # Every Sunday at 9:30pm UTC
   workflow_dispatch:
-    inputs:
-      dioxus:
-        description: 'Dioxus CLI'
-        required: true
-        default: 'false'
 
-env:
-  REGISTRY: hub.docker.com
+permissions: write-all
 
 jobs:
   application:
     env:
-      HANDLE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+      IMAGE: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
     - 
-      name: Checkout
+      name: checkout
       uses: actions/checkout@v4
+    - 
+      id: meta
+      name: docker metadata
+      uses: docker/metadata-action@v5
+      with:
+        flavor: latest=true
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
+        tags: |
+          type=schedule
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+          type=sha  
     -
-      name: Setup QEMU
+      name: setup qemu
       uses: docker/setup-qemu-action@v3
     -
       name: Setup Docker Buildx
@@ -44,10 +54,12 @@ jobs:
       name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        registry: ${{ env.REGISTRY }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        username: ${{ github.actor }}
     -
-      name: application
+      id: push
+      name: build and push
       uses: docker/build-push-action@v6
       with:
         cache-from: type=gha
@@ -55,7 +67,15 @@ jobs:
         context: .
         file: ./Dockerfile
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        labels: ${{ steps.meta.outputs.labels }}
         platforms: linux/amd64
         push: true
-        tags: ${{ env.HANDLE }}:latest,${{ env.HANDLE }}:${{ github.sha }}
-  
+        tags: ${{ steps.meta.outputs.tags }}
+    - 
+      continue-on-error: true
+      name: attestation
+      uses: actions/attest-build-provenance@v1
+      with:
+        push-to-registry: true
+        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE}}
+        subject-digest: ${{ steps.push.outputs.digest }}

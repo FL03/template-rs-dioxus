@@ -3,7 +3,7 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 use super::Settings;
-use crate::data::{Profile, Task};
+use crate::data::{samples::*, Profile, Task};
 use crate::types::ThemeMode;
 
 #[derive(
@@ -18,6 +18,15 @@ pub struct Context {
 }
 
 impl Context {
+    pub fn new() -> Self {
+        Self {
+            current_date: chrono::Local::now().format("%A, %B %e, %Y").to_string(),
+            employees: SAMPLE_PROFILES.clone(),
+            settings: Settings::default(),
+            tasks: SAMPLE_TASKS.clone(),
+            theme_mode: ThemeMode::default(),
+        }
+    }
     pub fn from_config(settings: Settings) -> Self {
         Self {
             settings,
@@ -48,13 +57,7 @@ impl Context {
 
 impl Default for Context {
     fn default() -> Self {
-        Self {
-            current_date: chrono::Local::now().format("%A, %B %e, %Y").to_string(),
-            employees: crate::SAMPLE_PROFILES.clone(),
-            settings: Settings::default(),
-            tasks: crate::SAMPLE_TASKS.clone(),
-            theme_mode: ThemeMode::default(),
-        }
+        Self::new()
     }
 }
 

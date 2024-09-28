@@ -1,0 +1,6 @@
+services:
+  nginx:
+    build: Dockerfile
+    container_name: debug
+    ports:
+      - "80:80"
