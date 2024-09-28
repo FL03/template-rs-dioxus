@@ -14,5 +14,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Log starting message
     tracing::info!("Starting the application...");
     // Launch the app
-    Ok(dioxus::launch(app::run))
+    dioxus::launch(app::run);
+    Ok(())
 }

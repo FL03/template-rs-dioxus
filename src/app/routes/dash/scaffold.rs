@@ -4,11 +4,7 @@
 */
 use dioxus::prelude::*;
 
-
-
-
-
-/// [`Appbar`] is a vertically oriented toolbar used to display common apps and other actionable 
+/// [`Appbar`] is a vertically oriented toolbar used to display common apps and other actionable
 /// content.
 #[component]
 pub fn Appbar() -> Element {
@@ -17,7 +13,6 @@ pub fn Appbar() -> Element {
 
 #[component]
 pub fn DashboardScaffold() -> Element {
-    
     rsx! {
         body { class: "min-h-screen bg-gray-100 text-gray-900 flex",
             div { class: "flex-grow flex flex-col",

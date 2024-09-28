@@ -6,7 +6,5 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn ProfilePage(uid: String) -> Element {
-    rsx! {
-
-    }
+    rsx! {}
 }

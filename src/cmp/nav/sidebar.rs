@@ -5,8 +5,8 @@
 use crate::cmp::badge::GrayBadge as Badge;
 use dioxus::prelude::*;
 
-/// [`Sidebar`] defines the drawer element for the dashboard; i.e. a widget containing 
-/// navigational links and/or information regarding the account, application / system, etc. 
+/// [`Sidebar`] defines the drawer element for the dashboard; i.e. a widget containing
+/// navigational links and/or information regarding the account, application / system, etc.
 /// Typically, these elements remain hidden until the user interacts with one of its triggers.
 pub fn Sidebar() -> Element {
     rsx! {

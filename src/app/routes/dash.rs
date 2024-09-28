@@ -10,15 +10,11 @@ mod scaffold;
 #[doc(hidden)]
 pub(crate) mod prev_dash;
 
-use crate::cmp::badge::GrayBadge as Badge;
-use crate::Route;
 use dioxus::prelude::*;
 
 #[component]
 pub fn Dashboard() -> Element {
-    rsx! {
-
-    }
+    rsx! {}
 }
 
 pub struct ProfileRef;
@@ -28,6 +24,4 @@ pub struct CurrentUser {
     pub uid: String,
 }
 
-pub struct DashboardCtx {
-    
-}
+pub struct DashboardCtx {}

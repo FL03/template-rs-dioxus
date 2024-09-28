@@ -6,7 +6,6 @@ use crate::cmp::badge::GrayBadge as Badge;
 use crate::Route;
 use dioxus::prelude::*;
 
-
 #[component]
 pub fn Dashboard() -> Element {
     rsx! {

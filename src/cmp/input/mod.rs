@@ -6,4 +6,3 @@
 pub use self::search::Search;
 
 mod search;
-

@@ -4,7 +4,7 @@
 */
 use dioxus::prelude::*;
 
-/// [`Toolbar`] defines a horizontal toolbar 
+/// [`Toolbar`] defines a horizontal toolbar
 #[component]
 pub fn Toolbar() -> Element {
     rsx! {}

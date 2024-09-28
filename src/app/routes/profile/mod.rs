@@ -3,7 +3,7 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 #[doc(inline)]
-pub use self::{cmp::ProfileCard, screen::ProfilePage};
+pub use self::screen::ProfilePage;
 
 mod screen;
 

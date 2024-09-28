@@ -6,7 +6,6 @@ use crate::cmp::AppBar;
 use crate::{Route, APP_NAME};
 use dioxus::prelude::*;
 
-
 #[component]
 pub fn Navbar() -> Element {
     let links = vec![
