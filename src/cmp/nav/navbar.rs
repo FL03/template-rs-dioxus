@@ -2,7 +2,11 @@
     Appellation: navbar <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-use crate::cmp::AppBar;
+#[doc(inline)]
+pub use self::inner::*;
+
+mod inner;
+
 use crate::{Route, APP_NAME};
 use dioxus::prelude::*;
 
@@ -14,7 +18,7 @@ pub fn Navbar() -> Element {
     ];
     let title = APP_NAME.to_string();
     rsx! {
-        AppBar { links, title }
+        NavbarBase { links, title }
         Outlet::<crate::Route> {}
     }
 }

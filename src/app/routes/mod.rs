@@ -3,9 +3,18 @@
     Contrib: FL03 <jo3mccain@icloud.com>
 */
 #[doc(inline)]
-pub use self::{dashboard::Dashboard, errors::*, settings::Settings, tasks::*};
+pub use self::{
+    dash::{Dashboard, DashboardCtx, DashboardScaffold},
+    errors::*,
+    home::Homepage,
+    profile::prelude::*,
+    settings::Settings,
+    tasks::Tasks,
+};
 
-mod dashboard;
+mod dash;
+mod home;
+mod profile;
 mod settings;
 mod tasks;
 
@@ -17,8 +26,10 @@ mod errors {
 }
 
 pub(crate) mod prelude {
-    pub use super::dashboard::Dashboard;
+    pub use super::dash::{Dashboard, DashboardScaffold};
     pub use super::errors::*;
+    pub use super::home::Homepage;
+    pub use super::profile::ProfilePage;
     pub use super::settings::Settings;
     pub use super::tasks::Tasks;
     pub use super::Route;
@@ -30,13 +41,23 @@ use dioxus::prelude::*;
 #[derive(Clone, Debug, PartialEq, Routable)]
 #[rustfmt::skip]
 pub enum Route {
-    // All routes under the NavBar layout will be rendered inside of the NavBar Outlet
+    /// The layout for most of the platform
     #[layout(Navbar)]
+        #[route("/")]
+        Homepage {},
+        #[route("/settings")]
+        Settings {},
         #[route("/tasks")]
         Tasks {},
     #[end_layout]
-    #[route("/")]
+    /// The dashboard
+    #[route("/dashboard")]
     Dashboard {},
+    #[route("/profile/:uid")]
+    ProfilePage {
+        uid: String,
+    },
+    /// The 404 page
     #[route("/:..route")]
     PageNotFound { route: Vec<String> },
 }

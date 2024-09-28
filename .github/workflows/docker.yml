@@ -5,7 +5,8 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 env:
-  REGISTRY: ghcr.io # hub.docker.com
+  # REGISTRY: ghcr.io
+  REGISTRY: hub.docker.com
 
 on:
   pull_request:
@@ -23,7 +24,7 @@ permissions: write-all
 jobs:
   application:
     env:
-      IMAGE: ${{ github.repository }}
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
     runs-on: ubuntu-latest
     steps:
     - 
@@ -35,7 +36,8 @@ jobs:
       uses: docker/metadata-action@v5
       with:
         flavor: latest=true
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
+        images: |
+          name=${{ env.IMAGE }},enable=true
         tags: |
           type=schedule
           type=ref,event=branch
@@ -55,10 +57,10 @@ jobs:
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        username: ${{ github.actor }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
     -
-      id: push
+      id: bnp
       name: build and push
       uses: docker/build-push-action@v6
       with:
@@ -78,4 +80,4 @@ jobs:
       with:
         push-to-registry: true
         subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE}}
-        subject-digest: ${{ steps.push.outputs.digest }}
+        subject-digest: ${{ steps.bnp.outputs.digest }}

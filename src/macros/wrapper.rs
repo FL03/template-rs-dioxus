@@ -138,7 +138,6 @@ macro_rules! wrapper {
     };
 }
 
-
 macro_rules! wrapper_t {
     (@decl $(#[derive($($meta:ident),*)])? $vis:vis $name:ident<$T:ident>) => {
 
