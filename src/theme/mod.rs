@@ -6,8 +6,12 @@
 //!
 //!
 #[doc(inline)]
-pub use self::interface::Theme;
+pub use self::{
+    color::{Color, Colors},
+    interface::Theme,
+};
 
+pub mod color;
 pub mod config;
 
 mod interface;
@@ -15,4 +19,9 @@ mod interface;
 pub mod wraps {
 
     wrapper!(BackgroundColor(String));
+}
+
+pub(crate) mod prelude {
+    pub use super::color::{colors::*, Color};
+    pub use super::interface::Theme;
 }

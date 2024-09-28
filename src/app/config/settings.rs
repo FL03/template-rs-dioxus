@@ -2,13 +2,12 @@
     Appellation: settings <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
-
+use super::kinds::*;
 use crate::types::ThemeMode;
 
-#[derive(
-    Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Deserialize, serde::Serialize,
-)]
+#[derive(Clone, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Deserialize, serde::Serialize)]
 pub struct Settings {
+    pub account: AccountCnf,
     pub theme: ThemeMode,
     pub title: String,
     pub version: String,
@@ -17,6 +16,7 @@ pub struct Settings {
 impl Settings {
     pub fn new(theme: ThemeMode, title: impl ToString, version: impl ToString) -> Self {
         Self {
+            account: AccountCnf::default(),
             theme,
             title: title.to_string(),
             version: version.to_string(),
@@ -57,10 +57,17 @@ impl Settings {
 impl Default for Settings {
     fn default() -> Self {
         Self {
+            account: AccountCnf::default(),
             theme: ThemeMode::Light,
             title: crate::APP_NAME.to_string(),
             version: env!("CARGO_PKG_VERSION").to_string(),
         }
+    }
+}
+
+impl core::fmt::Debug for Settings {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.write_str(serde_json::to_string_pretty(self).unwrap().as_str())
     }
 }
 

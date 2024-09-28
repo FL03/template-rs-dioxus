@@ -48,7 +48,7 @@ const _TAILWIND: &str = manganis::mg!(file("public/tailwind.css"));
 pub const APP_NAME: &str = "Rustic";
 
 pub(crate) mod primitives {
-    
+
     use lazy_static::lazy_static;
 
     type LinkMap = std::collections::HashMap<&'static str, &'static str>;

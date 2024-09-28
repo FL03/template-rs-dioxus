@@ -2,32 +2,54 @@
     Appellation: dash <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+use crate::cmp::{badge::GrayBadge as Badge, nav::Sidebar};
 use dioxus::prelude::*;
 
-/// [`Appbar`] is a vertically oriented toolbar used to display common apps and other actionable
-/// content.
-#[component]
-pub fn Appbar() -> Element {
-    rsx! {}
+pub enum Sized {
+    Sm,
+    Md,
+    Lg,
+    Xl,
+    XXL,
 }
 
+pub struct WrapperProps {
+    pub background: String,
+    pub margin: usize,
+    pub padding: usize,
+
+    pub child: Element,
+}
+/// [`DashboardScaffold`] defines the base layout for the dashboard
 #[component]
-pub fn DashboardScaffold() -> Element {
+pub fn DashboardScaffold(child: Element) -> Element {
+    let clock = "12:00 PM";
+    let weather = "87°F";
     rsx! {
+        // Base layout
         body { class: "min-h-screen bg-gray-100 text-gray-900 flex",
+            //
+            aside { class: "w-64 bg-white shadow-md",
+                div { class: "p-4",
+                    h1 { class: "text-2xl font-bold text-gray-800", "Proton" }
+                    Badge { text: "owner".to_string() }
+                }
+                nav { class: "mt-4",
+                }
+            }
             div { class: "flex-grow flex flex-col",
                 header { class: "w-full bg-blue-600 text-white p-2 flex items-center justify-between",
                     div { class: "flex items-center space-x-2",
                         i { "data-lucide": "atom", class: "h-6 w-6" }
                         span { class: "font-bold text-lg", "Proton" }
                     }
-                    div { class: "flex items-center space-x-4",
+                    div { class: "xs:hidden flex items-center space-x-4",
                         div { class: "flex items-center space-x-2",
                             i { "data-lucide": "cloud", class: "h-5 w-5" }
-                            span { class: "hidden sm:inline", "22°C" }
+                            span { class: "inline", {weather} }
                         }
                         div { class: "text-sm sm:text-base font-medium",
-                            "\n                    12:00 PM\n                "
+                            span { class: "inline", {clock} }
                         }
                         button { class: "text-white",
                             i { "data-lucide": "menu", class: "h-6 w-6" }

@@ -13,3 +13,8 @@ pub mod wrapper;
 pub(crate) mod prelude {
     pub use super::wrapper::Wrapper;
 }
+
+pub trait Entry {
+    type Node;
+    type Weight;
+}

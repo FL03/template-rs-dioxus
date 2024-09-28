@@ -14,7 +14,16 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn Dashboard() -> Element {
-    rsx! {}
+    rsx! {
+        DashboardScaffold {
+            child: rsx! {
+                div {
+                    class: "flex flex-col items-center justify-center",
+                    "Dashboard"
+                }
+            }
+        }
+    }
 }
 
 pub struct ProfileRef;
