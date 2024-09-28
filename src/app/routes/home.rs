@@ -2,35 +2,19 @@
     Appellation: home <module>
     Contrib: FL03 <jo3mccain@icloud.com>
 */
+
 use crate::cmp::badge::GrayBadge as Badge;
+use crate::cmp::nav::Sidebar;
 use crate::Route;
 use dioxus::prelude::*;
 
+
 #[component]
-pub fn Dashboard() -> Element {
+pub fn Homepage() -> Element {
     rsx! {
         div { class: "flex h-screen bg-gray-100",
             // Sidebar
-            aside { class: "w-64 bg-white shadow-md",
-                div { class: "p-4",
-                    h1 { class: "text-2xl font-bold text-gray-800", {crate::APP_NAME} }
-                    Badge { text: "Admin".to_string() }
-                }
-                nav { class: "mt-4",
-                    Link {
-                        class: "flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200",
-                        to: Route::Dashboard {},
-                        // svg { class: "w-5 h-5 mr-2", /* Dashboard icon SVG */ }
-                        "Dashboard"
-                    }
-                    Link {
-                        class: "flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200",
-                        to: Route::Tasks {},
-                        // svg { class: "w-5 h-5 mr-2", /* Settings icon SVG */ }
-                        "Tasks"
-                    }
-                }
-            }
+            Sidebar {}
 
             // Main Content
             div { class: "flex-1 flex flex-col overflow-hidden",

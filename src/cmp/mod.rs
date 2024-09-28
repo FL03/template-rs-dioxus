@@ -15,6 +15,7 @@ pub use self::{
 pub mod badge;
 pub mod card;
 pub mod icons;
+pub mod input;
 pub mod layout;
 pub mod nav;
 

@@ -45,4 +45,25 @@ extern crate dioxus_logger as dxl;
 
 const _TAILWIND: &str = manganis::mg!(file("public/tailwind.css"));
 
-pub const APP_NAME: &str = "RMS";
+pub const APP_NAME: &str = "Rustic";
+
+
+
+
+pub(crate) mod primitives {
+    use super::Route;
+    use lazy_static::lazy_static;
+
+    type LinkMap = std::collections::HashMap<&'static str, &'static str>;
+
+
+    lazy_static! {
+        pub static ref LINKS: LinkMap = LinkMap::from_iter([
+            ("home", "/"),
+            ("dashboard", "/dashboard"),
+            ("profile", "/profile"),
+            ("settings", "/settings"),
+            ("tasks", "/tasks"),
+        ]);
+    }
+}
